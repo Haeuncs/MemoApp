@@ -19,6 +19,9 @@ extension UIFont {
   public static var sb18: UIFont {
     return UIFont.systemFont(ofSize: 18, weight: .semibold)
   }
+  public static var sb16: UIFont {
+    return UIFont.systemFont(ofSize: 16, weight: .semibold)
+  }
   public static var sb14: UIFont {
     return UIFont.systemFont(ofSize: 14, weight: .semibold)
   }
@@ -32,5 +35,8 @@ extension UIFont {
   public static var m14: UIFont {
     return UIFont.systemFont(ofSize: 14, weight: .medium)
   }
-  
+  public static var r14: UIFont {
+    return UIFont.systemFont(ofSize: 14, weight: .regular)
+  }
+
 }

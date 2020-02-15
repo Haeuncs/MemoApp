@@ -10,10 +10,27 @@ import UIKit
 import SnapKit
 
 class HomeMemoTableCell: BaseTableCell {
+  
+  func configure(title: String?, memo: String?, date: Date?, image: UIImage? = nil) {
+    if title == nil {
+      self.titleLabel.text = " "
+    }else {
+      self.titleLabel.text = title
+    }
+    if memo == nil {
+      self.memoLabel.text = " "
+    }else {
+      self.memoLabel.text = memo
+    }
+    if date == nil {
+      self.dateLabel.text = " "
+    }else {
+      self.dateLabel.text = date!.korDateString()
+    }
+  }
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    self.selectionStyle = .none
-    
+//    self.selectionStyle = .none
     baseView.addSubview(titleLabel)
     baseView.addSubview(memoLabel)
     baseView.addSubview(dateLabel)

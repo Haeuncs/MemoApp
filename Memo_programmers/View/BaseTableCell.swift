@@ -12,6 +12,9 @@ import SnapKit
 class BaseTableCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = UIColor.memo_selectionColor
+    self.selectedBackgroundView = backgroundView
     self.addSubview(baseView)
     baseView.snp.makeConstraints { (make) in
       make.top.equalTo(self.safeAreaLayoutGuide.snp.top)

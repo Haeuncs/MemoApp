@@ -38,7 +38,7 @@ class MemoTextFieldView: UIView {
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "아직 여행 일정이 없어요."
+    label.text = "🏷 제목"
     label.font = .sb18
     return label
   }()
@@ -52,7 +52,7 @@ class MemoTextFieldView: UIView {
   }()
   lazy var textField: UITextField = {
     let text = UITextField()
-    text.placeholder = "이메일 주소를 입력해 주세요."
+    text.placeholder = "제목을 입력해주세요."
     text.clearButtonMode = UITextField.ViewMode.whileEditing
     text.textColor = .black
     text.font = .m18

@@ -17,6 +17,7 @@ class BaseViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .white
     navigationController?.navigationBar.isHidden = true
+    self.setupHideKeyboardOnTap()
     view.addSubview(contentView)
     contentView.snp.makeConstraints { (make) in
       make.top.equalTo(view.safeAreaLayoutGuide.snp.top)

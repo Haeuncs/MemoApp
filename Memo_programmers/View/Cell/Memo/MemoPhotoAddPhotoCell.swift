@@ -17,10 +17,10 @@ class MemoPhotoAddPhotoCell: UICollectionViewCell {
     self.addSubview(stackView)
     
     baseView.snp.makeConstraints { (make) in
-      make.top.equalTo(self).offset(10)
-      make.leading.equalTo(self).offset(6)
-      make.trailing.equalTo(self).offset(-10)
-      make.bottom.equalTo(self).offset(-6)
+      make.top.equalTo(self)
+      make.leading.equalTo(self)
+      make.trailing.equalTo(self)
+      make.bottom.equalTo(self)
     }
     stackView.snp.makeConstraints { (make) in
       make.center.equalTo(baseView)
@@ -33,9 +33,9 @@ class MemoPhotoAddPhotoCell: UICollectionViewCell {
   lazy var baseView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.layer.cornerRadius = 18
-    view.layer.borderColor = UIColor.memo_black.cgColor
-    view.layer.borderWidth = 1
+    view.layer.shadow(color: .black, alpha: 0.16, x: 0, y: 3, blur: 6, spread: 0)
+    view.layer.cornerRadius = 12  
+    view.backgroundColor = .white
     return view
   }()
     lazy var stackView: UIStackView = {

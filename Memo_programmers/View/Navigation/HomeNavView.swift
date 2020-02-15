@@ -14,12 +14,18 @@ class HomeNavigationView: UIView {
     super.init(frame: frame)
     
     self.addSubview(titleLabel)
+    self.addSubview(addButton)
     self.addSubview(lineView)
     
     titleLabel.snp.makeConstraints { (make) in
       make.top.lessThanOrEqualTo(self)
       make.leading.trailing.equalTo(self)
       make.bottom.equalTo(lineView.snp.top)
+    }
+    addButton.snp.makeConstraints { (make) in
+      make.trailing.equalTo(self)
+      make.centerY.equalTo(titleLabel)
+      make.height.width.equalTo(34)
     }
     lineView.snp.makeConstraints { (make) in
       make.leading.trailing.bottom.equalTo(self)
@@ -38,6 +44,12 @@ class HomeNavigationView: UIView {
     label.textColor = UIColor.memo_black
     label.font = UIFont.h28
     return label
+  }()
+  lazy var addButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(named: "blackAdd"), for: .normal)
+    return button
   }()
 
   lazy var lineView: UIView = {

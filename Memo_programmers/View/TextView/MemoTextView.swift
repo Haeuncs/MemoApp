@@ -14,20 +14,27 @@ class MemoTextView: UIView {
     super.init(frame: frame)
     
     self.addSubview(titleLabel)
-    self.addSubview(stackView)
+    self.addSubview(baseView)
+    baseView.addSubview(textView)
+    baseView.addSubview(lineView)
+    
     titleLabel.snp.makeConstraints { (make) in
       make.top.leading.trailing.equalTo(self)
     }
-    stackView.snp.makeConstraints { (make) in
+    baseView.snp.makeConstraints { (make) in
       make.top.equalTo(titleLabel.snp.bottom).offset(16)
       make.trailing.bottom.equalTo(self)
       make.leading.equalTo(self).offset(30)
     }
     textView.snp.makeConstraints { (make) in
-      make.height.equalTo(28)
+      make.top.equalTo(baseView.snp.top)
+      make.leading.trailing.equalTo(baseView  )
+      make.bottom.equalTo(lineView.snp.top)
     }
     lineView.snp.makeConstraints { (make) in
       make.height.equalTo(2)
+      make.leading.trailing.equalTo(baseView)
+      make.bottom.equalTo(baseView)
     }
   }
   
@@ -38,22 +45,29 @@ class MemoTextView: UIView {
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "아직 여행 일정이 없어요."
+    label.text = "📝 메모"
     label.font = .sb18
     return label
   }()
-  lazy var stackView: UIStackView = {
-    let stack = UIStackView(arrangedSubviews: [textView, lineView])
-    stack.translatesAutoresizingMaskIntoConstraints = false
-    stack.axis = .vertical
-    stack.spacing = 2
-//    stack.alignment = .center
-    return stack
+  lazy var baseView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = .systemPink
+    return view
   }()
+//  lazy var stackView: UIStackView = {
+//    let stack = UIStackView(arrangedSubviews: [textView, lineView])
+//    stack.translatesAutoresizingMaskIntoConstraints = false
+//    stack.axis = .vertical
+//    stack.spacing = 2
+////    stack.alignment = .center
+//    return stack
+//  }()
   lazy var textView: UITextView = {
     let text = UITextView()
 //    text.placeholder = "이메일 주소를 입력해 주세요."
 //    text.clearButtonMode = UITextField.ViewMode.whileEditing
+    text.isScrollEnabled = false
     text.textColor = .black
     text.font = .m18
     text.tintColor = .black
