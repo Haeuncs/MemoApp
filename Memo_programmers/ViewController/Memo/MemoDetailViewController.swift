@@ -11,12 +11,20 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
+/**
+ 현재 메모뷰의 Type
+ - Edit: 기존 메모 편집
+ - Add: 메모 추가
+ - Read: 기존 메모 열람
+ */
 enum MemoDetailType {
   case Edit
   case Add
   case Read
 }
-
+/**
+ 현재 메모 뷰에서 나타나는 팝업 이벤트 Type
+ */
 enum MemoDetailPopupType {
   case edit
   case delete
@@ -24,10 +32,17 @@ enum MemoDetailPopupType {
   case camera
   case urlLoadImage
 }
+
+/**
+ MemoDetailPopupType 에 따른 팝업 띄우기
+ */
 protocol MemoDetailDelegate: class {
   func memoDetailPopup(type: MemoDetailPopupType)
 }
 
+protocol MemoDetailLoadURLImageDelegate: class {
+  func addLoadURLImage(image: UIImage)
+}
 class MemoDetailViewController: BaseViewController {
   private var disposeBag = DisposeBag()
   private var currentDetailType: MemoDetailType? {
@@ -35,24 +50,28 @@ class MemoDetailViewController: BaseViewController {
       if currentDetailType != nil {
         setDetailType(type: currentDetailType!)
       }
+      self.photoCollect.reloadData()
     }
   }
   private var textViewHeight: NSLayoutConstraint?
   private var lastScrollOffset: CGFloat?
   private var height: CGFloat = 0
   private var viewModel: MemoViewModelType?
-  private var memoData: MemoData? {
+  private var memoData: MemoData = MemoData(){
     didSet {
-      self.titleTextView.textField.text = self.memoData?.title
-      self.memoTextView.textView.text = self.memoData?.memo
+      self.titleTextView.textField.text = self.memoData.title
+      self.memoTextView.textView.text = self.memoData.memo
     }
   }
   init(type: MemoDetailType, coreData: CoreDataModelType, memoData: MemoData?) {
     self.viewModel = MemoViewModel(coreData: coreData)
     super.init(nibName: nil, bundle: nil)
-    self.setDetailType(type: type)
     defer {
-      self.memoData = memoData
+//      self.setDetailType(type: type)
+      if memoData != nil {
+      self.memoData = memoData!
+      }
+      self.currentDetailType = type
     }
   }
   
@@ -124,6 +143,8 @@ class MemoDetailViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     print(self.memoTextView.textView.contentSize.height)
+//    self.photoCollect.reloadData()
+
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -162,7 +183,7 @@ class MemoDetailViewController: BaseViewController {
                               memo: self?.memoTextView.textView.text,
                               date: Date(),
                               identifier: UUID(),
-                              imageArray: nil)) ?? (false, nil)
+                              imageArray: self?.memoData.imageArray)) ?? (false, nil)
           
           if bool {
             self?.navigationController?.popViewController(animated: true)
@@ -172,9 +193,9 @@ class MemoDetailViewController: BaseViewController {
         }else if (self?.currentDetailType == MemoDetailType.Edit) {
           let (bool, error) = self?.viewModel?.inputs.update(updateMemo: MemoData(title: self?.titleTextView.textField.text,
                                                                                   memo: self?.memoTextView.textView.text,
-                                                                                  date: Date(),
-                                                                                  identifier: self?.memoData?.identifier!,
-                                                                                  imageArray: nil)) ?? (false, nil)
+                                                                                  date: self?.memoData.date,
+                                                                                  identifier: self?.memoData.identifier!,
+                                                                                  imageArray: self?.memoData.imageArray)) ?? (false, nil)
           if bool {
             self?.navigationController?.popViewController(animated: true)
           }else {
@@ -289,13 +310,38 @@ extension MemoDetailViewController: UITextViewDelegate {
       view.layoutIfNeeded()
     }
   }
+  func openPhotoPicker(){
+    let picker: UIImagePickerController = UIImagePickerController()
+    picker.delegate = self
+    picker.allowsEditing = true
+    picker.sourceType = .photoLibrary
+    picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+    DispatchQueue.main.async {
+      weak var pvc = self.presentedViewController
+      pvc?.dismiss(animated: true) {
+        self.present(picker, animated: true, completion: nil)
+      }
+    }
+  }
+  func openCamera(){
+    let picker: UIImagePickerController = UIImagePickerController()
+    picker.delegate = self
+    picker.allowsEditing = true
+    picker.sourceType = .camera
+    DispatchQueue.main.async {
+      weak var pvc = self.presentedViewController
+      pvc?.dismiss(animated: true) {
+        self.present(picker, animated: true, completion: nil)
+      }
+    }
+  }
 }
 
 extension MemoDetailViewController: MemoDetailDelegate {
   func memoDetailPopup(type: MemoDetailPopupType) {
     switch type {
     case .delete:
-      let (bool, error) = self.viewModel?.inputs.delete(identifier: (self.memoData?.identifier!)!) ?? (false, nil)
+      let (bool, _) = self.viewModel?.inputs.delete(identifier: (self.memoData.identifier!)) ?? (false, nil)
       if (bool) {
         // 현재 표시되고 있는 뷰 (bottom popup vc)
         weak var pvc = self.presentedViewController
@@ -308,24 +354,87 @@ extension MemoDetailViewController: MemoDetailDelegate {
       pvc?.dismiss(animated: true, completion: {
         self.currentDetailType = .Edit
       })
-    default:
-      self.viewModel?.inputs.delete(identifier: (self.memoData?.identifier!)!)
+    case .camera:
+      self.openCamera()
+    case .urlLoadImage:
+      weak var pvc = self.presentedViewController
+      pvc?.dismiss(animated: true, completion: {
+        let vc = ImageURLInputPopupViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        self.present(vc, animated: true, completion: nil)
+      })
+    case .loadPhoto:
+      self.openPhotoPicker()
     }
   }
 }
 
-extension MemoDetailViewController: UICollectionViewDelegate {
+
+extension MemoDetailViewController: MemoDetailLoadURLImageDelegate {
+  func addLoadURLImage(image: UIImage) {
+    if self.memoData.imageArray == nil {
+      self.memoData.imageArray = [image]
+    }else {
+      self.memoData.imageArray?.append(image)
+    }
+    self.photoCollect.reloadData()
+  }
   
+}
+
+extension MemoDetailViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if currentDetailType == MemoDetailType.Add || currentDetailType == MemoDetailType.Edit {
+      if indexPath.row == self.memoData.imageArray?.count ?? 0 {
+        let vc = MemoBottomPopupViewController(data: (self.viewModel?.outputs.memoAddImage)!)
+        vc.delegate = self
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        self.present(vc, animated: true, completion: nil)
+      }
+    }else {
+      
+    }
+  }
 }
 
 extension MemoDetailViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    if currentDetailType == MemoDetailType.Add || currentDetailType == MemoDetailType.Edit {
+      return (self.memoData.imageArray?.count ?? 0) + 1
+    }else {
+      return self.memoData.imageArray?.count ?? 0
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "addCell", for: indexPath) as! MemoPhotoAddPhotoCell
+    if indexPath.row == self.memoData.imageArray?.count {
+      cell.configure(image: nil)
+    }else {
+      cell.configure(image: self.memoData.imageArray?[indexPath.row])
+    }
     return cell
   }
   
+}
+
+extension MemoDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+  //MARK: UIImagePickerControllerDelegate
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    if let chosenImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+//      images.append(chosenImage)
+      if self.memoData.imageArray == nil {
+        debugPrint(self.memoData.imageArray)
+        self.memoData.imageArray = [chosenImage]
+        debugPrint(self.memoData.imageArray)
+      }else {
+        self.memoData.imageArray?.append(chosenImage)
+      }
+      self.photoCollect.reloadData()
+    }
+    picker.dismiss(animated: true, completion: nil)
+  }
 }

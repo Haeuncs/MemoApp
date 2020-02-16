@@ -42,9 +42,9 @@ class MemoEditViewModel: MemoEditViewModelInputs, MemoEditViewModelOutputs, Memo
 
     default:
       self.memoEditData = Observable<[MemoEdit]>.of([
-        MemoEdit(iconSysName: "pencil", title: "편집"),
-        MemoEdit(iconSysName: "pencil", title: "편집"),
-        MemoEdit(iconSysName: "trash", title: "삭제")
+        MemoEdit(iconSysName: "pencil", title: "사진 불러오기"),
+        MemoEdit(iconSysName: "pencil", title: "카메라로 찍기"),
+        MemoEdit(iconSysName: "trash", title: "URL 로 입력하기")
       ])
     }
   }

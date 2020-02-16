@@ -16,6 +16,7 @@ protocol MemoViewModelInputs {
 
 protocol MemoViewModelOutputs {
   var memoEditData: [MemoEdit] {get}
+  var memoAddImage: [MemoEdit] {get}
 }
 
 protocol MemoViewModelType {
@@ -28,7 +29,11 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     MemoEdit(iconSysName: "pencil", title: "편집"),
     MemoEdit(iconSysName: "trash", title: "삭제")
   ]
-  
+  var memoAddImage: [MemoEdit] = [
+    MemoEdit(iconSysName: "photo", title: "사진 불러오기"),
+    MemoEdit(iconSysName: "camera", title: "카메라로 찍기"),
+    MemoEdit(iconSysName: "arrowshape.turn.up.right", title: "URL 로 입력하기")
+  ]
   let coreData: CoreDataModelType
   init(coreData: CoreDataModelType) {
     self.coreData = coreData

@@ -42,10 +42,10 @@ class BasePullDownViewController: UIViewController {
       make.top.leading.trailing.equalTo(contentView)
     }
 
-    navView.doneButton.rx.tap
-      .subscribe(onNext: { [weak self] (_) in
-        self?.dismiss(animated: true, completion: nil)
-      }).disposed(by: disposeBag)
+//    navView.doneButton.rx.tap
+//      .subscribe(onNext: { [weak self] (_) in
+//        self?.dismiss(animated: true, completion: nil)
+//      }).disposed(by: disposeBag)
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)

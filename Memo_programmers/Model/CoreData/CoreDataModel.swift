@@ -48,10 +48,10 @@ class CoreDataModel: CoreDataModelInputs, CoreDataModelOutputs, CoreDataModelTyp
     fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
     var fetchMemoDataArray: [MemoData] = []
     if let result = try? managedContext.fetch(fetchRequest2) {
-      var uiImageArr: [UIImage] = []
       for data in result {
-        if let data = data.images?.value(forKey: "identifier") as? Set<Data>{
-          for i in Array(data) {
+        var uiImageArr: [UIImage] = []
+        if let imageData = data.images?.value(forKey: "identifier") as? Set<Data>{
+          for i in Array(imageData) {
             uiImageArr.append(UIImage.init(data: i)!)
           }
         }
@@ -66,16 +66,25 @@ class CoreDataModel: CoreDataModelInputs, CoreDataModelOutputs, CoreDataModelTyp
     self.memos.onNext(fetchMemoDataArray)
   }
   func add(newMemo: MemoData) -> (Bool, Error?){
+    
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let managedContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
     managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-    
+
+    var coredataTypeArr: [Images] = []
+    for i in newMemo.imageArray ?? [] {
+      let image = (NSEntityDescription.insertNewObject(forEntityName: "Images", into: managedContext) as! Images)
+      image.identifier = i.pngData()!
+      coredataTypeArr.append(image)
+    }
+
     let memo = Memo(context: managedContext)
     memo.title = newMemo.title
     memo.memo = newMemo.memo
     memo.date = newMemo.date
     memo.identifier = newMemo.identifier
+    memo.images = NSSet(array: coredataTypeArr)
     do {
       try managedContext.save()
       return (true, nil)

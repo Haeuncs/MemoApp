@@ -16,7 +16,7 @@ public struct MemoData {
   let memo: String?
   let date: Date?
   let identifier: UUID?
-  let imageArray: [UIImage]?
+  var imageArray: [UIImage]?
   
 }
 

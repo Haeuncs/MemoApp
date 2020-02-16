@@ -14,6 +14,7 @@ class PullNavigationView: BaseView {
     super.init(frame: frame)
     
 //    baseView.addSubview(imageView)
+    baseView.addSubview(leftButton)
     baseView.addSubview(titleLabel)
     baseView.addSubview(doneButton)
     baseView.addSubview(lineView)
@@ -25,6 +26,10 @@ class PullNavigationView: BaseView {
 //    }
     titleLabel.snp.makeConstraints { (make) in
       make.center.equalTo(baseView)
+    }
+    leftButton.snp.makeConstraints { (make) in
+      make.leading.equalTo(baseView)
+      make.centerY.equalTo(baseView)
     }
     doneButton.snp.makeConstraints { (make) in
       make.trailing.equalTo(baseView)
@@ -61,6 +66,13 @@ class PullNavigationView: BaseView {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setTitle("완료", for: .normal)
+    button.titleLabel?.font = .sb12
+    button.setTitleColor(.memo_black, for: .normal)
+    return button
+  }()
+  lazy var leftButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
     button.titleLabel?.font = .sb12
     button.setTitleColor(.memo_black, for: .normal)
     return button

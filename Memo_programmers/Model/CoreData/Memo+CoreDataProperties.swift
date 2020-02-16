@@ -21,6 +21,24 @@ extension Memo {
     @NSManaged public var identifier: UUID?
     @NSManaged public var memo: String?
     @NSManaged public var title: String?
-    @NSManaged public var images: Images?
+    @NSManaged public var modifyDate: Date?
+    @NSManaged public var images: NSSet?
+
+}
+
+// MARK: Generated accessors for images
+extension Memo {
+
+    @objc(addImagesObject:)
+    @NSManaged public func addToImages(_ value: Images)
+
+    @objc(removeImagesObject:)
+    @NSManaged public func removeFromImages(_ value: Images)
+
+    @objc(addImages:)
+    @NSManaged public func addToImages(_ values: NSSet)
+
+    @objc(removeImages:)
+    @NSManaged public func removeFromImages(_ values: NSSet)
 
 }

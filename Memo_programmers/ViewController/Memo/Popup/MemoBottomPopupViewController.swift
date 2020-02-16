@@ -41,6 +41,18 @@ class MemoBottomPopupViewController: BasePullDownViewController {
   }
   override func viewDidLoad() {
     super.viewDidLoad()
+    initView()
+    bindRx()
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+  }
+  // View ✨
+  func initView(){
+    self.navView.titleLabel.text = "사진 입력"
     contentView.addSubview(tableView)
     tableView.snp.makeConstraints { (make) in
       make.top.equalTo(navView.snp.bottom)
@@ -50,17 +62,14 @@ class MemoBottomPopupViewController: BasePullDownViewController {
     tableViewHeightConstrants = tableView.heightAnchor.constraint(equalToConstant: CGFloat(54 * self.tableData.count))
     tableViewHeightConstrants?.isActive = true
   }
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
+  // Bind 🏷
+  func bindRx(){
+    self.navView.doneButton.rx.tap
+      .subscribe(onNext: { [weak self] (_) in
+        self?.dismiss(animated: true, completion: nil)
+      }).disposed(by: disposeBag)
   }
 
-  func bindRx(){
-    
-  }
-  // View ✨
   lazy var tableView: UITableView = {
     let view = UITableView()
     view.delegate = self
@@ -84,11 +93,11 @@ extension MemoBottomPopupViewController: UITableViewDelegate {
     case "삭제":
       self.delegate?.memoDetailPopup(type: .delete)
     case "사진 불러오기":
-      print("사진 불러오기")
+      self.delegate?.memoDetailPopup(type: .loadPhoto)
     case "카메라로 찍기":
-      print("사진 불러오기")
+      self.delegate?.memoDetailPopup(type: .camera)
     case "URL 로 입력하기":
-      print("사진 불러오기")
+      self.delegate?.memoDetailPopup(type: .urlLoadImage)
     default:
       print("편집")
     }

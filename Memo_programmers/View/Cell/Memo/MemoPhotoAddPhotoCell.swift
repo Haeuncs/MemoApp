@@ -11,10 +11,21 @@ import SnapKit
 
 class MemoPhotoAddPhotoCell: UICollectionViewCell {
   
+  func configure(image: UIImage?){
+    if image == nil {
+      self.stackView.isHidden = false
+      self.imageView.isHidden = true
+    }else {
+      self.stackView.isHidden = true
+      self.imageView.isHidden = false
+      self.imageView.image = image!
+    }
+  }
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.addSubview(baseView)
     self.addSubview(stackView)
+    baseView.addSubview(imageView)
     
     baseView.snp.makeConstraints { (make) in
       make.top.equalTo(self)
@@ -24,6 +35,9 @@ class MemoPhotoAddPhotoCell: UICollectionViewCell {
     }
     stackView.snp.makeConstraints { (make) in
       make.center.equalTo(baseView)
+    }
+    imageView.snp.makeConstraints { (make) in
+      make.top.leading.trailing.bottom.equalTo(baseView)
     }
   }
   
@@ -36,6 +50,14 @@ class MemoPhotoAddPhotoCell: UICollectionViewCell {
     view.layer.shadow(color: .black, alpha: 0.16, x: 0, y: 3, blur: 6, spread: 0)
     view.layer.cornerRadius = 12  
     view.backgroundColor = .white
+    return view
+  }()
+  lazy var imageView: UIImageView = {
+    let view = UIImageView()
+    view.layer.cornerRadius = 12
+    view.clipsToBounds = true
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.contentMode = .scaleAspectFill
     return view
   }()
     lazy var stackView: UIStackView = {
