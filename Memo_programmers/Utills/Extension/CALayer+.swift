@@ -8,6 +8,14 @@
 
 import UIKit
 
+struct Shadow {
+  let color: UIColor
+  let alpha: Float
+  let x: CGFloat
+  let y: CGFloat
+  let blur: CGFloat
+}
+
 extension CALayer {
   func shadow(
     color: UIColor = .black,
@@ -29,4 +37,20 @@ extension CALayer {
       shadowPath = UIBezierPath(rect: rect).cgPath
     }
   }
+  func shadow(
+    shadow: Shadow)
+  {
+    shadowColor = shadow.color.cgColor
+    shadowOpacity = shadow.alpha
+    shadowOffset = CGSize(width: shadow.x, height: shadow.y)
+    shadowRadius = shadow.blur / 2.0
+//    if spread == 0 {
+//      shadowPath = nil
+//    } else {
+//      let dx = -spread
+//      let rect = bounds.insetBy(dx: dx, dy: dx)
+//      shadowPath = UIBezierPath(rect: rect).cgPath
+//    }
+  }
+
 }

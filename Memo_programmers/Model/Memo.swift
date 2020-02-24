@@ -8,16 +8,18 @@
 
 import UIKit
 
-// 데이터 모델 (앱에서 사용) => || => coredata
+/**
+ 데이터 모델 (앱에서 사용) => corddata model => coredata
+ */
 
 public struct MemoData {
   
   let title: String?
   let memo: String?
   let date: Date?
+  var modifyDate: Date? = nil
   let identifier: UUID?
-  var imageArray: [UIImage]?
-  
+  var imageArray: [Image]?
 }
 
 extension MemoData {
@@ -25,6 +27,7 @@ extension MemoData {
     title = ""
     memo = ""
     date = Date()
+    modifyDate = Date()
     identifier = UUID()
     imageArray = []
   }

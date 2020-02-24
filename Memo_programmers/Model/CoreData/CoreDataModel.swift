@@ -6,16 +6,20 @@
 //  Copyright © 2020 LEE HAEUN. All rights reserved.
 //
 
+/**
+ 코어 데이터 조작하는 모델
+ save, update, add, load
+ */
+
 import UIKit
 import CoreData
 import RxSwift
-
 
 protocol CoreDataModelInputs {
   func getMemos()
   func add(newMemo: MemoData) -> (Bool, Error?)
   func delete(identifier: UUID) -> (Bool, Error?)
-    func update(updateMemo: MemoData) -> (Bool, Error?)
+  func update(updateMemo: MemoData) -> (Bool, Error?)
 }
 
 protocol CoreDataModelOutputs {
@@ -40,24 +44,33 @@ class CoreDataModel: CoreDataModelInputs, CoreDataModelOutputs, CoreDataModelTyp
     self.memos = PublishSubject()
   }
   
+  
   /// coredata에서 memo 저장된 순서로 fetch
   func getMemos() {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    let managedContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-    let fetchRequest2 = NSFetchRequest<Memo>(entityName: entityName)
-    fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+    
     var fetchMemoDataArray: [MemoData] = []
-    if let result = try? managedContext.fetch(fetchRequest2) {
+    if let result = CoreDataManager.sharedManager.fetchAllMemos() {
       for data in result {
-        var uiImageArr: [UIImage] = []
-        if let imageData = data.images?.value(forKey: "identifier") as? Set<Data>{
-          for i in Array(imageData) {
-            uiImageArr.append(UIImage.init(data: i)!)
+        var uiImageArr: [Image] = []
+        if let imageData = data.images as? Set<Images> {
+          // image sorted by Date
+          let sortedImageByDate = imageData.sorted { (image1, image2) -> Bool in
+            return image1.date! < image2.date!
+          }
+          for image in sortedImageByDate {
+            var structImage = Image()
+            structImage.date = image.date ?? Date()
+            if let imageIdentifier = image.identifier {
+              structImage.image = UIImage.init(data: imageIdentifier) ?? UIImage()
+            }
+            uiImageArr.append(structImage)
           }
         }
+        
         let tempData: MemoData = MemoData(title: data.title,
                                           memo: data.memo,
                                           date: data.date,
+                                          modifyDate: data.modifyDate,
                                           identifier: data.identifier,
                                           imageArray: uiImageArr)
         fetchMemoDataArray.append(tempData)
@@ -66,85 +79,17 @@ class CoreDataModel: CoreDataModelInputs, CoreDataModelOutputs, CoreDataModelTyp
     self.memos.onNext(fetchMemoDataArray)
   }
   func add(newMemo: MemoData) -> (Bool, Error?){
-    
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    let managedContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-    managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
-    var coredataTypeArr: [Images] = []
-    for i in newMemo.imageArray ?? [] {
-      let image = (NSEntityDescription.insertNewObject(forEntityName: "Images", into: managedContext) as! Images)
-      image.identifier = i.pngData()!
-      coredataTypeArr.append(image)
-    }
-
-    let memo = Memo(context: managedContext)
-    memo.title = newMemo.title
-    memo.memo = newMemo.memo
-    memo.date = newMemo.date
-    memo.identifier = newMemo.identifier
-    memo.images = NSSet(array: coredataTypeArr)
-    do {
-      try managedContext.save()
-      return (true, nil)
-    }catch let error {
-      return (false, error)
-    }
+    return CoreDataManager.sharedManager.add(newMemo: newMemo)
   }
   
   /// identifier 로 메모 찾아 삭제
   func delete(identifier: UUID) -> (Bool, Error?) {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    let managedContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-    
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-    fetchRequest.returnsObjectsAsFaults = false
-    let predicate = NSPredicate(format: "identifier == %@", identifier as CVarArg)
-    fetchRequest.predicate = predicate
-    
-    do {
-      let fetchResults: Array = try managedContext.fetch(fetchRequest)
-      
-      for fetchResult in fetchResults {
-        let managedObject = fetchResult as! NSManagedObject
-        
-        managedContext.delete(managedObject)
-      }
-      try managedContext.save()
-      return (true, nil)
-//      self.fetchDiaries()
-    }catch let error {
-      return (false, error)
-//      self.error.onNext(error.localizedDescription)
-    }
+    return CoreDataManager.sharedManager.delete(identifier: identifier)
   }
   
   
   func update(updateMemo: MemoData) -> (Bool, Error?){
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    let managedContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-    managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-    fetchRequest.returnsObjectsAsFaults = false
-    let predicate = NSPredicate(format: "identifier == %@", updateMemo.identifier! as CVarArg)
-    fetchRequest.predicate = predicate
-    fetchRequest.fetchLimit = 1
-    
-    do {
-      //検索実行
-      let fetchResult = try managedContext.fetch(fetchRequest).first
-      let managedObject = fetchResult as! NSManagedObject
-      managedObject.setValue(updateMemo.title, forKey: "title")
-      managedObject.setValue(updateMemo.memo, forKey: "memo")
-      managedObject.setValue(updateMemo.date, forKey: "date")
-      try managedContext.save()
-        return (true, nil)
-    }catch let error {
-      NSLog("\(error)")
-      return (false, error)
-    }
-    
+    return CoreDataManager.sharedManager.update(updateMemo: updateMemo)
   }
   
 }

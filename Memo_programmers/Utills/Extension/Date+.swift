@@ -11,7 +11,7 @@ import Foundation
 extension Date {
   static var dateFormatterKor: DateFormatter = {
     let dateFormat = DateFormatter()
-    dateFormat.dateFormat = "yyyy년 M월 d일 hh:mm:ss"
+    dateFormat.dateFormat = "yyyy년 M월 d일 hh:mm a"
     return dateFormat
   }()
   static var dateFormatter20200201: DateFormatter = {
