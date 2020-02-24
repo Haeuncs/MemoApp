@@ -16,7 +16,6 @@ private enum HomeConstants {
     static let EstimatedHeight: CGFloat = 100
     static let IdentifierWithImage: String = "CellWithImage"
     static let IdentifierWithoutImage: String = "CellWithoutImage"
-    static let backgroundColor: UIColor = Color.background
   }
   enum AddButton {
     static let height: CGFloat = 48
@@ -24,22 +23,6 @@ private enum HomeConstants {
     static let backgroundColor: UIColor = Color.veryLightGrey
     static let image: UIImage = UIImage(named: "addIcon")!
   }
-}
-
-/**
- order Type Popup Type
- */
-
-enum OrderType {
-  case title
-  case createDate
-  case modifyDate
-}
-/**
- change order type delegate
- */
-protocol MemoOrderTypeDelegate: class {
-  func memoOrderSelected(type: OrderType)
 }
 
 class HomeViewController: BaseViewController {
@@ -60,15 +43,18 @@ class HomeViewController: BaseViewController {
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let vc = TutorialViewController()
-    present(vc, animated: true, completion: nil)
+    if userPreferences.getisOpenTutorial() == false {
+      let vc = TutorialViewController()
+      present(vc, animated: true, completion: {
+        userPreferences.setOpenTutorial(bool: true)
+      })
+    }
   }
   func setAppearance(){
     view.backgroundColor = Color.background
     contentView.backgroundColor = Color.background
-    self.tableView.backgroundColor = HomeConstants.Table.backgroundColor
+    self.tableView.backgroundColor = Color.background
     self.addMemoButton.backgroundColor = HomeConstants.AddButton.backgroundColor
-    navView.setAppearance()
   }
   func initView(){
     contentView.addSubview(navView)
@@ -102,7 +88,6 @@ class HomeViewController: BaseViewController {
     view.separatorStyle = .none
     view.estimatedRowHeight = HomeConstants.Table.EstimatedHeight
     view.rowHeight = UITableView.automaticDimension
-    view.backgroundColor = HomeConstants.Table.backgroundColor
     view.register(HomeMemoTableCell.self, forCellReuseIdentifier: HomeConstants.Table.IdentifierWithImage)
     view.register(HomeMemoWithoutImageTableCell.self, forCellReuseIdentifier: HomeConstants.Table.IdentifierWithoutImage)
     view.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
@@ -207,19 +192,23 @@ private extension HomeViewController {
     let currentTheme = userPreferences.getColorTheme()
     let vc = BottomViewController(title: "설정")
     vc.addAction(BottomCellData(cellData:
-      MemoEdit(image: currentTheme == "light" ? UIImage(named: "darkMode")! : UIImage(named: "lightMode")!,
-               title: currentTheme == "light" ? "다크모드 켜기" : "라이트모드 켜기"),
+      MemoEdit(image: currentTheme == .light ? UIImage(named: "darkMode")! : UIImage(named: "lightMode")!,
+               title: currentTheme == .light ? "다크모드 켜기" : "라이트모드 켜기"),
                                 handler: {
                                   let vc = HomeViewController()
-                                  if currentTheme == "light" {
-                                    userPreferences.setColorTheme(theme: "dark")
+                                  if currentTheme == .light {
+                                    userPreferences.setColorTheme(theme: .dark)
                                     Theme.darkMode()
                                     self.setRootViewController(vc)
                                   } else {
-                                    userPreferences.setColorTheme(theme: "light")
+                                    userPreferences.setColorTheme(theme: .light)
                                     Theme.lightMode()
                                     self.setRootViewController(vc)
                                   }
+    }))
+    vc.addAction(BottomCellData(cellData: MemoEdit(image: UIImage(named: "orderTitle")!, title: "튜토리얼 다시보기"), handler: {
+      let vc = TutorialViewController()
+      self.present(vc, animated: true, completion: {})
     }))
     vc.addAction(BottomCellData(cellData: MemoEdit(image: UIImage(named: "MoreDelete")!, title: "모든 데이터 삭제하기"), handler: {
       self.viewModel.inputs.flushData()
@@ -251,19 +240,19 @@ private extension HomeViewController {
     vc.addAction(BottomCellData(cellData: orderTypes.title,
                                 style: currentOrderType == orderTypes.title.title ? .selected : .default ,
                                 handler: {
-                                  userPreferences.setOrderType(type: "title")
+                                  userPreferences.setOrderType(type: .title)
                                   self.viewModel.inputs.getMemo()
     }))
     vc.addAction(BottomCellData(cellData: orderTypes.createDate,
                                 style: currentOrderType == orderTypes.createDate.title ? .selected : .default,
                                 handler: {
-                                  userPreferences.setOrderType(type: "createDate")
+                                  userPreferences.setOrderType(type: .createDate)
                                   self.viewModel.inputs.getMemo()
     }))
     vc.addAction(BottomCellData(cellData: orderTypes.modifyDate,
                                 style: currentOrderType == orderTypes.modifyDate.title ? .selected : .default,
                                 handler: {
-                                  userPreferences.setOrderType(type: "modifyDate")
+                                  userPreferences.setOrderType(type: .modifyDate)
                                   self.viewModel.inputs.getMemo()
     }))
     
@@ -283,20 +272,3 @@ private extension HomeViewController {
   }
 }
 
-
-extension HomeViewController: MemoOrderTypeDelegate {
-  func memoOrderSelected(type: OrderType) {
-    self.dismiss(animated: true, completion: nil)
-    switch type {
-    case .title:
-      userPreferences.setOrderType(type: "title")
-    case .createDate:
-      userPreferences.setOrderType(type: "createDate")
-    case .modifyDate:
-      userPreferences.setOrderType(type: "modifyDate")
-    }
-    self.viewModel.inputs.getMemo()
-  }
-  
-  
-}

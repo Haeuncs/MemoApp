@@ -21,14 +21,17 @@ private enum Style {
   enum Title {
     static let title: String = "메모\n시작하기"
     static let font: UIFont = .sb24
-    static let color: UIColor = Color.black
   }
   enum Table {
+    static let rowHeight: CGFloat = 100
     static let data: [TutorialType] = [
       TutorialType(image: UIImage(named: "shopping-list")!, title: "메모", subTitle: "사진과 메모를 함께 저장하세요."),
       TutorialType(image: UIImage(named: "cost-per-click")!, title: "메모를 꾹 눌러보세요.", subTitle: "빠르게 메모를 편집할 수 있어요."),
       TutorialType(image: UIImage(named: "pigeon")!, title: "다크모드", subTitle: "다크모드를 지원합니다. 설정에서 확인해보세요."),
     ]
+  }
+  enum Button {
+    static let title: String = "계속하기"
   }
 }
 class TutorialViewController: UIViewController {
@@ -50,7 +53,7 @@ class TutorialViewController: UIViewController {
     view.backgroundColor = Color.background
     tableView.backgroundColor = Color.background
     titleLabel.textColor = Color.black
-    addButton.backgroundColor = Color.grey
+    addButton.backgroundColor = Color.black
     addButton.setTitleColor(Color.background, for: .normal)
   }
 
@@ -88,7 +91,7 @@ class TutorialViewController: UIViewController {
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "메모\n시작하기"
+    label.text = Style.Title.title
     label.font = .sb28
     label.numberOfLines = 0
     label.textAlignment = .center
@@ -99,14 +102,14 @@ class TutorialViewController: UIViewController {
     table.separatorStyle = .none
     table.translatesAutoresizingMaskIntoConstraints = false
     table.register(TutorialTableCell.self, forCellReuseIdentifier: "cell")
-    table.rowHeight = 100
+    table.rowHeight = Style.Table.rowHeight
     table.dataSource = self
     return table
   }()
   lazy var addButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("계속하기", for: .normal)
+    button.setTitle(Style.Button.title, for: .normal)
     button.titleLabel?.font = .sb16
     button.layer.cornerRadius = Constant.UI.radius
     return button

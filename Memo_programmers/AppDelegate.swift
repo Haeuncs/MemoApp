@@ -18,11 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     self.window = UIWindow(frame: UIScreen.main.bounds)
     let theme = userPreferences.getColorTheme()
-    if theme == "light" {
-      UIApplication.shared.statusBarStyle = .default
+    if theme == .light {
       Theme.lightMode()
     } else {
-      UIApplication.shared.statusBarStyle = .lightContent
       Theme.darkMode()
     }
 //    let coreData = CoreDataModel()

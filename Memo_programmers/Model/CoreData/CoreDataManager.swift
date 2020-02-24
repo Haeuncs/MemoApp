@@ -145,22 +145,16 @@ class CoreDataManager {
     if NSClassFromString("XCTest") != nil {
       fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
     } else {
-    if let orderType = userPreferences.getOrderType() {
-      if orderType == "title" {
+      let orderType = userPreferences.getOrderType()
+      switch orderType {
+      case .title:
         fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare))]
-      } else if orderType == "modifyDate" {
-        fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "modifyDate", ascending: false)]
-      } else {
+      case .createDate:
         fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+      case .modifyDate:
+        fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "modifyDate", ascending: false)]
       }
-    } else {
-      userPreferences.setOrderType(type: "createDate")
-      fetchRequest2.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
     }
-    }
-        
-//    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
-    
     do {
       let memos = try managedContext.fetch(fetchRequest2)
       return memos
@@ -168,6 +162,7 @@ class CoreDataManager {
       print("Could not fetch. \(error), \(error.userInfo)")
       return nil
     }
+    
   }
 
   

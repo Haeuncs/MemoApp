@@ -20,8 +20,12 @@ extension UserDefaults {
   private var orderType: String {
     return "orderType"
   }
-  func getOrderType() -> String? {
-    return userPreferences.string(forKey: orderType)
+  func getOrderType() -> OrderType {
+    if let type = userPreferences.string(forKey: orderType) {
+      return OrderType(rawValue: type) ?? OrderType.createDate
+    } else {
+      return .createDate
+    }
   }
   func getOrderTypeKor() -> String? {
     guard let type = userPreferences.string(forKey: orderType) else {
@@ -35,8 +39,8 @@ extension UserDefaults {
       return Constant.BottomPopup.MemoOrderType.modifyDate.title
     }
   }
-  func setOrderType(type: String) {
-    userPreferences.set(type, forKey: orderType)
+  func setOrderType(type: OrderType) {
+    userPreferences.set(type.rawValue, forKey: orderType)
   }
   
   /**
@@ -45,19 +49,30 @@ extension UserDefaults {
   private var colorTheme: String {
     return "colorTheme"
   }
-  func getColorTheme() -> String {
+  func getColorTheme() -> ColorTheme {
     if let theme = userPreferences.string(forKey: colorTheme) {
-      return theme
+      return theme == ColorTheme.light.rawValue ? .light : .dark
     } else {
-      setColorTheme(theme: "light")
-      return "light"
+      setColorTheme(theme: .light)
+      return .light
     }
   }
   /**
    - Parameters:
    - theme: 컬러 테마 `light`, `dark`
    */
-  func setColorTheme(theme: String) {
-    userPreferences.set(theme, forKey: colorTheme)
+  func setColorTheme(theme: ColorTheme) {
+    userPreferences.set(theme.rawValue, forKey: colorTheme)
+  }
+
+  private var tutorial: String {
+    return "openTutorial"
+  }
+  func getisOpenTutorial() -> Bool {
+    return userPreferences.bool(forKey: tutorial)
+  }
+  func setOpenTutorial(bool: Bool) {
+    userPreferences.set(bool, forKey: tutorial)
   }
 }
+

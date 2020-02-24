@@ -58,6 +58,7 @@ class HomeNavigationView: UIView {
     settingButton.snp.makeConstraints { (make) in
       make.height.width.equalTo(HomeNavigationConstants.Button.height)
     }
+    setAppearance()
   }
   
   func setAppearance() {

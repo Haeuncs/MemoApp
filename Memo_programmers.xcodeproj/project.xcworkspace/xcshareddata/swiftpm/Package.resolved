@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "RxCoreData",
-        "repositoryURL": "https://github.com/naivalf27/RxCoreData/",
-        "state": {
-          "branch": "spm_support",
-          "revision": "aad51c9af022e53eb108387c480ad2085b2aa9b7",
-          "version": null
-        }
-      },
-      {
         "package": "RxSwift",
         "repositoryURL": "https://github.com/ReactiveX/RxSwift",
         "state": {

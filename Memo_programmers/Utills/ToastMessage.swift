@@ -13,10 +13,10 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-enum ToastType {
-  case warning
-  case success
-}
+//enum ToastType {
+//  case warning
+//  case success
+//}
 class ToastMessage: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -25,19 +25,13 @@ class ToastMessage: UIView {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  public static func show(message: String, toastType: ToastType = .success){
+  public static func show(message: String){
     guard let window = UIApplication.shared.keyWindow else{
       fatalError("No access to UIApplication Window")
     }
     let alertHeight = CGFloat(54 + 50 + Constant.UI.safeInsetBottom_iOS10)
     
     let alert = ToastMessage(frame: CGRect(x: 0, y: window.frame.maxY + alertHeight , width: window.frame.width, height: alertHeight))
-//    switch toastType {
-//    case .success:
-//      alert.contentView.setBackgroundColor(color: UIColor.온도컬러.어두운회색.withAlphaComponent(0.5))
-//    case .warning:
-//      alert.contentView.setBackgroundColor(color: UIColor.온도컬러.핑크.withAlphaComponent(0.5))
-//    }
     alert.alpha = 0
     alert.setup()
     alert.titleLabel.text = message

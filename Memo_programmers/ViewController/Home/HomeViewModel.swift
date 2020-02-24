@@ -49,7 +49,7 @@ class HomeViewModel: HomeViewModelInputs, HomeViewModelOutputs, HomeViewModelPro
   }
   func deleteMemo(identifier: UUID?) {
     if let data = identifier {
-    self.coreData.inputs.delete(identifier: data)
+    let _ = self.coreData.inputs.delete(identifier: data)
     } else {
       //error처리
     }

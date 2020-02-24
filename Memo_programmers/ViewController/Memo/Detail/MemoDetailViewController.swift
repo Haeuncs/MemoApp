@@ -189,7 +189,6 @@ class MemoDetailViewController: UIViewController {
       .bind(to: (self.viewModel.title))
       .disposed(by: disposeBag)
     
-    
     memoDetailView.memoTextView.textView.rx.text
       .orEmpty
       .bind(to: (self.viewModel.content))
