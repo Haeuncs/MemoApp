@@ -11,11 +11,8 @@ import RxSwift
 import RxCocoa
 
 protocol MemoViewModelInputs {
-  /// 제목
   var title: BehaviorRelay<String> {get}
-  /// 본문
   var content: BehaviorRelay<String> {get}
-  /// 이미지들
   var imageArray: BehaviorRelay<[Image]> {get}
   func add() -> Bool
   func update() -> Bool
@@ -23,9 +20,7 @@ protocol MemoViewModelInputs {
 }
 
 protocol MemoViewModelOutputs {
-  /// popup 에서 그리는 데이터
   var memoEditData: [MemoEdit] {get}
-  /// popup 에서 그리는 데이터
   var memoAddImage: [MemoEdit] {get}
   var error: PublishSubject<String> {get}
   var memo: BehaviorRelay<MemoData> {get}
@@ -35,12 +30,17 @@ protocol MemoViewModelType {
   var inputs: MemoViewModelInputs {get}
   var outputs: MemoViewModelOutputs {get}
 }
+
 class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelType {
-  var error = PublishSubject<String>()
+  
+  // MARK: - Inputs
   var title: BehaviorRelay<String>
   var content: BehaviorRelay<String>
   var imageArray: BehaviorRelay<[Image]>
-  
+
+  // MARK: - Outputs
+  let memo: BehaviorRelay<MemoData>
+  var error = PublishSubject<String>()
   var memoEditData: [MemoEdit] = [
     Constant.BottomPopup.MemoEditType.edit,
     Constant.BottomPopup.MemoEditType.delete
@@ -51,7 +51,7 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     Constant.BottomPopup.MemoAddPhotoType.loadByURL
   ]
   
-  let memo: BehaviorRelay<MemoData>
+  // MARK: - Init
   let coreData: CoreDataModelType
   init(coreData: CoreDataModelType, memo: MemoData?) {
     self.coreData = coreData
@@ -67,6 +67,7 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
       self.imageArray = BehaviorRelay(value: [])
     }
   }
+  
   func add() -> Bool{
     let (bool, _) = coreData.inputs.add(newMemo:
       MemoData(title: self.title.value,
@@ -97,6 +98,7 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     }
     return bool
   }
+  
   func delete() -> Bool {
     let (bool, _) = coreData.inputs.delete(identifier: self.memo.value.identifier!)
     if !bool {

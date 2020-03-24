@@ -12,17 +12,6 @@ import RxSwift
 import RxCocoa
 
 /**
- 현재 메모뷰의 Type
- - Edit: 기존 메모 편집
- - Add: 메모 추가
- - Read: 기존 메모 열람
- */
-enum MemoDetailType {
-  case Edit
-  case Add
-  case Read
-}
-/**
  ImageURLInputViewController 에서 로드한 UIImage 가져오기
  */
 protocol MemoDetailLoadURLImageDelegate: class {
@@ -30,15 +19,23 @@ protocol MemoDetailLoadURLImageDelegate: class {
 }
 
 class MemoDetailViewController: UIViewController {
+  
   static let photoIdentifier = "DetailsCollectionViewCell"
   
+  // MARK: - Properties
   private typealias UI = Constant.UI
+  private var viewBottomConstrant: NSLayoutConstraint?
+  private var textViewHeight: NSLayoutConstraint?
+  private var lastScrollOffset: CGFloat?
+  private var memoTextViewHeight: CGFloat = 0
+  private var viewModel: MemoViewModelType
+  private var isKeyboardShow: Bool = false
   
   private var disposeBag = DisposeBag()
   private var currentDetailType: MemoDetailType? {
     didSet {
       if currentDetailType != nil {
-        setDetailType(type: currentDetailType!)
+        configure(type: currentDetailType!)
         if currentDetailType != MemoDetailType.Read {
           self.addToolBar(textView: memoDetailView.memoTextView.textView)
         }
@@ -51,19 +48,8 @@ class MemoDetailViewController: UIViewController {
       memoDetailView.photoCollect.reloadData()
     }
   }
-  private var viewBottomConstrant: NSLayoutConstraint?
-  private var textViewHeight: NSLayoutConstraint?
-  private var lastScrollOffset: CGFloat?
-  private var memoTextViewHeight: CGFloat = 0
-  private var viewModel: MemoViewModelType
-  private var isKeyboardShow: Bool = false
   
-  lazy var memoDetailView: MemoDetailView = {
-    let view = MemoDetailView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-  
+  // MARK: - Init
   init(type: MemoDetailType, coreData: CoreDataModelType, memoData: MemoData?) {
     self.viewModel = MemoViewModel(coreData: coreData, memo: memoData)
     super.init(nibName: nil, bundle: nil)
@@ -81,9 +67,10 @@ class MemoDetailViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    // MARK: keyboard
+    
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillShow),
@@ -110,11 +97,13 @@ class MemoDetailViewController: UIViewController {
     textViewHeight = memoDetailView.memoTextView.textView.heightAnchor.constraint(equalToConstant: memoDetailView.memoTextView.textView.contentSize.height)
     textViewHeight?.isActive = true
   }
+  
   func setAppearance(){
     view.backgroundColor = Color.background
     memoDetailView.setAppearance()
   }
-  // View ✨
+  
+  // MARK: - View ✨
   func initView(){
     self.view.addSubview(memoDetailView)
     memoDetailView.scrollView.delegate = self
@@ -132,7 +121,7 @@ class MemoDetailViewController: UIViewController {
     viewBottomConstrant?.isActive = true
     
   }
-  // Bind 🏷
+  // MARK: - Bind 🏷
   func bindRx(){
     self.viewModel.outputs.error
       .subscribe(onNext: { (string) in
@@ -178,7 +167,6 @@ class MemoDetailViewController: UIViewController {
     memoDetailView.memoTextView.textView.rx
       .didBeginEditing
       .subscribe(onNext: { [weak self] (_) in
-//        self?.memoDetailView.setActiveMemoTextView()
         self?.memoTextViewDidBegin()
       }).disposed(by: disposeBag)
     
@@ -190,10 +178,19 @@ class MemoDetailViewController: UIViewController {
       }).disposed(by: disposeBag)
     
   }
+  
+  lazy var memoDetailView: MemoDetailView = {
+    let view = MemoDetailView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  // MARK: - Functions
+  
   /**
    현재 Detail View 의 타입에 따른 View Setting
    */
-  func setDetailType(type: MemoDetailType){
+  func configure(type: MemoDetailType){
     memoDetailView.navView.configure(type: type)
     switch type {
     case .Edit, .Add:
@@ -204,11 +201,10 @@ class MemoDetailViewController: UIViewController {
       memoDetailView.memoTextView.textView.isEditable = false
     }
   }
-  // MARK: - MEMO TEXT VIEW EVENT
+  
   func memoTextViewDidBegin() {
     self.lastScrollOffset = self.memoDetailView.scrollView.contentOffset.y
     DispatchQueue.main.async {
-      //      self.memoDetailView.scrollView.setContentOffset(CGPoint(x: 0, y:  self.memoDetailView.memoTextView.frame.minY - 32), animated: true)
       self.textViewHeight?.constant = self.memoTextViewHeight
       UIView.animate(withDuration: UI.animationDuration, animations: {
         self.view.layoutIfNeeded()
@@ -220,6 +216,7 @@ class MemoDetailViewController: UIViewController {
       }
     }
   }
+  
   func memoTextViewDidEnd() {
     DispatchQueue.main.async {
       self.textViewHeight?.constant = self.memoDetailView.memoTextView.textView.contentSize.height
@@ -229,16 +226,17 @@ class MemoDetailViewController: UIViewController {
       }
     }
   }
-  /// 선택된 메모 공유
+
+  // MARK: - Popup
+
   func shareMemo(text: String) {
     let textToShare = text
     let objectsToShare = [textToShare] as [Any]
     let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
     activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
-    
     present(activityVC, animated: true, completion: nil)
   }
-  /// 선택된 메모 수정
+  
   func openMemoEditVC(memo: MemoData) {
     let memoEditType = Constant.BottomPopup.MemoEditType.self
     let vc = BottomViewController(title: memoEditType.typeTitle)
@@ -273,7 +271,9 @@ class MemoDetailViewController: UIViewController {
     }))
     self.present(vc, animated: true, completion: nil)
   }
+  
   // MARK: - Open Gallery & Camera
+  
   func openPhotoPicker(){
     let picker: UIImagePickerController = UIImagePickerController()
     picker.delegate = self
@@ -286,6 +286,7 @@ class MemoDetailViewController: UIViewController {
       }
     }
   }
+  
   func openCamera(){
     let picker: UIImagePickerController = UIImagePickerController()
     picker.delegate = self
@@ -298,6 +299,7 @@ class MemoDetailViewController: UIViewController {
       }
     }
   }
+  
   func openImages(index: Int) {
     let vc = ImageViewController(images: self.viewModel.inputs.imageArray.value.map {
       return $0.image
@@ -307,18 +309,14 @@ class MemoDetailViewController: UIViewController {
     self.present(vc, animated: true, completion: nil)
   }
   
-  // MARK: - KeyboardWillShow
-  @objc func keyboardWillShow(_ notification: Notification){
+  // MARK: - Keyboard
+  
+  @objc func keyboardWillShow(_ notification: Notification) {
     guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
     let keyboardHeight = keyboardFrame.height
-    print(keyboardHeight)
-    if #available(iOS 11.0, *) {
-      self.memoTextViewHeight = (view.frame.height - memoDetailView.memoTextView.frame.minY - keyboardHeight - 46 - UI.safeInsetBottom)
-    } else {
-      // Fallback on earlier versions
-      self.memoTextViewHeight = (view.frame.height - memoDetailView.memoTextView.frame.minY - keyboardHeight - 46 - UI.safeInsetBottom_iOS10)
-    }
+    self.memoTextViewHeight = (view.frame.height - memoDetailView.memoTextView.frame.minY - keyboardHeight - 46 - UI.safeInsetBottom_iOS10)
     viewBottomConstrant?.constant = -keyboardFrame.height
+    
     UIView.animate(withDuration: Constant.UI.animationDuration) {
       self.view.layoutIfNeeded()
     }
@@ -326,11 +324,12 @@ class MemoDetailViewController: UIViewController {
   @objc func keyboardWillHide(){
     viewBottomConstrant?.constant = 0
     self.isKeyboardShow = false
+    
     UIView.animate(withDuration: Constant.UI.animationDuration) {
       self.view.layoutIfNeeded()
     }
   }
-  /// 선택된 이미지를 삭제
+    
   @objc func deleteImage(_ button: UIButton) {
     var images = self.viewModel.inputs.imageArray.value
     images.remove(at: button.tag)
@@ -342,13 +341,25 @@ class MemoDetailViewController: UIViewController {
     }
   }
   
-  //  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-  //    if isKeyboardShow {
-  //      view.endEditing(true)
-  //    }
-  //  }
+  @objc func donePressed(){
+    view.endEditing(true)
+  }
   
+  @objc func cancelPressed(){
+    view.endEditing(true)
+  }
 }
+
+// MARK: - MemoDetailLoadURLImageDelegate
+
+extension MemoDetailViewController: MemoDetailLoadURLImageDelegate {
+  func addLoadURLImage(image: UIImage) {
+    self.viewModel.inputs.imageArray.accept((self.viewModel.inputs.imageArray.value ) + [Image(image: image, date: Date())])
+    memoDetailView.photoCollect.reloadData()
+  }
+}
+
+// MARK: - UITextViewDelegate
 
 extension MemoDetailViewController: UITextViewDelegate {
   func addToolBar(textView: UITextView){
@@ -362,26 +373,13 @@ extension MemoDetailViewController: UITextViewDelegate {
       toolBar.setItems([spaceButton, doneButton], animated: false)
       toolBar.isUserInteractionEnabled = true
       toolBar.sizeToFit()
-      
-      //      textView.delegate = self
       textView.inputAccessoryView = toolBar
     }
   }
-  @objc func donePressed(){
-    view.endEditing(true)
-  }
-  @objc func cancelPressed(){
-    view.endEditing(true) // or do something
-  }
+  
 }
 
-extension MemoDetailViewController: MemoDetailLoadURLImageDelegate {
-  func addLoadURLImage(image: UIImage) {
-    self.viewModel.inputs.imageArray.accept((self.viewModel.inputs.imageArray.value ) + [Image(image: image, date: Date())])
-    memoDetailView.photoCollect.reloadData()
-  }
-}
-
+// MARK: - UICollectionViewDelegate
 
 extension MemoDetailViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -400,11 +398,13 @@ extension MemoDetailViewController: UICollectionViewDelegate {
   }
 }
 
+// MARK: - UICollectionViewDataSource
+
 extension MemoDetailViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if currentDetailType == MemoDetailType.Add ||
       currentDetailType == MemoDetailType.Edit {
-      return (self.viewModel.inputs.imageArray.value.count ) + 1
+      return (self.viewModel.inputs.imageArray.value.count) + 1
     } else if self.viewModel.inputs.imageArray.value.count == 0 {
       return 1
     } else {
@@ -425,8 +425,9 @@ extension MemoDetailViewController: UICollectionViewDataSource {
   }
 }
 
-extension MemoDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-  //MARK: UIImagePickerControllerDelegate
+// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
+
+extension MemoDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let imageOrientaion = chosenImage.fixedOrientation() {
       self.viewModel.inputs.imageArray

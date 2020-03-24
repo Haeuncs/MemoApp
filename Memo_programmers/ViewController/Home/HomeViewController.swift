@@ -27,9 +27,12 @@ private enum HomeConstants {
 
 class HomeViewController: BaseViewController {
   
+  // MARK: - Properties
+
   private var disposeBag = DisposeBag()
   private var viewModel: HomeViewModelType = HomeViewModel(coreData: CoreDataModel())
   
+  // MARK: - Lifecycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,10 +40,12 @@ class HomeViewController: BaseViewController {
     bindRx()
     setAppearance()
   }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.viewModel.inputs.getMemo()
   }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     if userPreferences.getisOpenTutorial() == false {
@@ -50,12 +55,16 @@ class HomeViewController: BaseViewController {
       })
     }
   }
+  
+  // MARK: - View ✨
+
   func setAppearance(){
     view.backgroundColor = Color.background
     contentView.backgroundColor = Color.background
     self.tableView.backgroundColor = Color.background
     self.addMemoButton.backgroundColor = HomeConstants.AddButton.backgroundColor
   }
+  
   func initView(){
     contentView.addSubview(navView)
     contentView.addSubview(tableView)
@@ -75,37 +84,9 @@ class HomeViewController: BaseViewController {
       make.bottom.equalTo(contentView).offset(-Constant.UI.Size.margin)
     }
   }
-  private lazy var navView: HomeNavigationView = {
-    let view = HomeNavigationView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
   
-  private lazy var tableView: UITableView = {
-    let view = UITableView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: Constant.UI.safeInsetBottom_iOS10, right: 0)
-    view.separatorStyle = .none
-    view.estimatedRowHeight = HomeConstants.Table.EstimatedHeight
-    view.rowHeight = UITableView.automaticDimension
-    view.register(HomeMemoTableCell.self, forCellReuseIdentifier: HomeConstants.Table.IdentifierWithImage)
-    view.register(HomeMemoWithoutImageTableCell.self, forCellReuseIdentifier: HomeConstants.Table.IdentifierWithoutImage)
-    view.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
-    return view
-  }()
-  
-  private lazy var addMemoButton: BaseButton = {
-    let view = BaseButton()
-    view.backgroundColor = HomeConstants.AddButton.backgroundColor
-    view.layer.cornerRadius = Constant.UI.radius
-    view.layer.shadow(shadow: Constant.UI.shadow)
-    view.setImage(HomeConstants.AddButton.image, for: .normal)
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-}
+  // MARK: - Bind 🏷
 
-private extension HomeViewController {
   func bindRx(){
     
     self.navView.addButton.rx.tap
@@ -154,7 +135,38 @@ private extension HomeViewController {
         }
       }).disposed(by: disposeBag)
   }
+
+  lazy var navView: HomeNavigationView = {
+    let view = HomeNavigationView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
+  lazy var tableView: UITableView = {
+    let view = UITableView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: Constant.UI.safeInsetBottom_iOS10, right: 0)
+    view.separatorStyle = .none
+    view.estimatedRowHeight = HomeConstants.Table.EstimatedHeight
+    view.rowHeight = UITableView.automaticDimension
+    view.register(HomeMemoTableCell.self, forCellReuseIdentifier: HomeConstants.Table.IdentifierWithImage)
+    view.register(HomeMemoWithoutImageTableCell.self, forCellReuseIdentifier: HomeConstants.Table.IdentifierWithoutImage)
+    view.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchHandler(sender:))))
+    return view
+  }()
+  
+  lazy var addMemoButton: BaseButton = {
+    let view = BaseButton()
+    view.backgroundColor = HomeConstants.AddButton.backgroundColor
+    view.layer.cornerRadius = Constant.UI.radius
+    view.layer.shadow(shadow: Constant.UI.shadow)
+    view.setImage(HomeConstants.AddButton.image, for: .normal)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+}
+
+extension HomeViewController {
   /// 이미지가 있는 cell
   private func cellWithImage(with element: MemoData, from table: UITableView) -> UITableViewCell {
     if let cell = table.dequeueReusableCell(withIdentifier: HomeConstants.Table.IdentifierWithImage) as? HomeMemoTableCell {
@@ -163,6 +175,7 @@ private extension HomeViewController {
     }
     return UITableViewCell()
   }
+  
   /// 이미지가 없는 cell
   private func cellWithoutImage(with element: MemoData, from table: UITableView) -> UITableViewCell {
     if let cell = table.dequeueReusableCell(withIdentifier: HomeConstants.Table.IdentifierWithoutImage) as? HomeMemoWithoutImageTableCell {
@@ -179,7 +192,9 @@ private extension HomeViewController {
       self.openMemoEditVC(memo: self.viewModel.outputs.memos.value[row])
     }
   }
-  /// 선택된 메모 공유
+
+  // MARK: - Popup
+
   func shareMemo(text: String) {
     let textToShare = text
     let objectsToShare = [textToShare] as [Any]
@@ -188,6 +203,7 @@ private extension HomeViewController {
     
     present(activityVC, animated: true, completion: nil)
   }
+  
   func openSetting() {
     let currentTheme = userPreferences.getColorTheme()
     let vc = BottomViewController(title: "설정")
@@ -215,6 +231,7 @@ private extension HomeViewController {
     }))
     self.present(vc, animated: true, completion: nil)
   }
+  
   /// 선택된 메모 수정
   func openMemoEditVC(memo: MemoData) {
     let memoEditType = Constant.BottomPopup.MemoEditType.self
@@ -232,6 +249,7 @@ private extension HomeViewController {
     }))
     present(vc, animated: true, completion: nil)
   }
+  
   /// 메모 정렬하는 뷰컨 열기
   func openMemoOrderVC() {
     let currentOrderType = userPreferences.getOrderTypeKor()
@@ -258,6 +276,7 @@ private extension HomeViewController {
     
     self.present(vc, animated: true, completion: nil)
   }
+  
   func setRootViewController(_ vc: UIViewController, animated: Bool = true) {
       guard let window = UIApplication.shared.keyWindow else {
           return

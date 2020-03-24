@@ -61,7 +61,7 @@ class MemoDetailView: BaseView {
     photoLabel.textColor = Color.black
     photoCollect.backgroundColor = Color.background
   }
-  // View ✨
+  // MARK: - View ✨
   func initView(){
     baseView.addSubview(navView)
     baseView.addSubview(scrollView)

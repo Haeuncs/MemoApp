@@ -12,20 +12,10 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-/**
- URL 로 이미지를 로드하는 Navigation Type
- - load: 이미지 로드 상태
- - save: load 성공 시 저장 상태로
- */
-enum ImageURLType {
-  case load
-  case save
-}
-
 class ImageURLInputPopupViewController: BasePullDownViewController {
   
+  // MARK: - Properties
   public weak var delegate: MemoDetailLoadURLImageDelegate?
-  
   private var disposeBag = DisposeBag()
   private var bottomConstraints: NSLayoutConstraint?
   private var height: CGFloat = 0
@@ -37,33 +27,39 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
       self.setCurrentImageURLType(type: current)
     }
   }
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  
+  // MARK: - Init
+  init() {
+    super.init(nibName: nil, bundle: nil)
     self.modalPresentationStyle = .overFullScreen
     self.modalTransitionStyle = .crossDissolve
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Lifecycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
     initView()
     bindRx()
     self.currentImageURLType = .load
-    // MARK: keyboard
+    
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillShow),
       name: UIResponder.keyboardWillShowNotification,
       object: nil
     )
-    
   }
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     self.titleTextView.textField.becomeFirstResponder()
   }
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-  }
-  // View ✨
+  
+  // MARK: - View ✨
   func initView() {
     navView.titleLabel.text = "URL 로 입력하기"
     navView.leftButton.setTitle("취소", for: .normal)
@@ -92,7 +88,6 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
     loadImageView.snp.makeConstraints { (make) in
       make.top.equalTo(titleTextView.snp.bottom)
       make.leading.trailing.bottom.equalTo(containerView)
-//      make.height.equalTo(100)
     }
     failureView.snp.makeConstraints { (make) in
       make.top.equalTo(titleTextView.snp.bottom)
@@ -101,7 +96,8 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
     bottomConstraints = containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
     bottomConstraints?.isActive = true
   }
-  // Bind 🏷
+  
+  // MARK: - Bind 🏷
   func bindRx(){
     self.navView.doneButton.rx.tap
       .subscribe(onNext: { (_) in
@@ -119,6 +115,8 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
         self?.dismiss(animated: true, completion: nil)
       }).disposed(by: disposeBag)
   }
+  
+  
   lazy var containerView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -133,18 +131,21 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
     view.textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     return view
   }()
+  
   lazy var loadImageView: UIImageView = {
     let view = UIImageView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.contentMode = .scaleAspectFit
     return view
   }()
+  
   lazy var failureView: URLFailureView = {
     let view = URLFailureView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.isHidden = true
     return view
   }()
+  
   func setCurrentImageURLType(type: ImageURLType){
     switch type {
     case .load:
@@ -167,16 +168,18 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
       }
     }
   }
+  
   @objc func keyboardWillShow(_ notification: Notification){
     guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
     let keyboardHeight = keyboardFrame.height
-
+    
     self.bottomConstraints?.constant = -keyboardHeight
     
     UIView.animate(withDuration: 0.33, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
+  
   @objc func textFieldChanged(_ textField: UITextField){
     self.currentImageURLType = .load
   }

@@ -46,7 +46,6 @@ class HomeNavigationView: UIView {
       make.trailing.equalTo(self)
       make.centerY.equalTo(titleLabel)
       make.top.bottom.equalTo(self)
-//      make.height.width.equalTo(HomeNavigationConstants.Button.height)
     }
     lineView.snp.makeConstraints { (make) in
       make.leading.trailing.bottom.equalTo(self)

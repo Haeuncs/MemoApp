@@ -14,9 +14,9 @@
             filePath = "Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "textFieldChanged(_:)"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "keyboardWillShow(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -40,15 +40,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "251417F1-59B2-4A1B-BA95-430EA8E53E2F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "loadUrlImage()"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "setCurrentImageURLType(type:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -56,48 +56,16 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "BB4DE16E-057D-4D92-ACFC-9FBED895A041"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "loadUrlImage()"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "setCurrentImageURLType(type:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BB4DE16E-057D-4D92-ACFC-9FBED895A041 - 46edbe0da3785e07"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Memo_programmers.ImageURLInputPopupViewController.loadUrlImage() -&gt; ()"
-                  moduleName = "Memo_programmers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
-                  offsetFromSymbolStart = "392">
-               </Location>
-               <Location
-                  uuid = "BB4DE16E-057D-4D92-ACFC-9FBED895A041 - 1ed8a1bc2b8ba145"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Kingfisher.RetrieveImageResult, Kingfisher.KingfisherError&gt;) -&gt; () in Memo_programmers.ImageURLInputPopupViewController.loadUrlImage() -&gt; ()"
-                  moduleName = "Memo_programmers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "160"
-                  endingLineNumber = "160"
-                  offsetFromSymbolStart = "96">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,8 +94,8 @@
             filePath = "Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
             landmarkName = "openCamera()"
             landmarkType = "7">
             <Locations>
@@ -142,8 +110,8 @@
                   urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "298"
-                  endingLineNumber = "298"
+                  startingLineNumber = "297"
+                  endingLineNumber = "297"
                   offsetFromSymbolStart = "196">
                </Location>
                <Location
@@ -157,8 +125,8 @@
                   urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "299"
-                  endingLineNumber = "299"
+                  startingLineNumber = "298"
+                  endingLineNumber = "298"
                   offsetFromSymbolStart = "116">
                </Location>
             </Locations>
@@ -174,25 +142,9 @@
             filePath = "Memo_programmers/ViewController/Memo/Popup/ImageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "collectionView(_:layout:sizeForItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F114BFD4-E583-4592-98C6-285169F07B68"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Memo_programmers/ViewController/Memo/Popup/ImageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "viewWillDisappear(_:)"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "scrollViewDidEndDecelerating(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -206,8 +158,8 @@
             filePath = "Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444">
+            startingLineNumber = "443"
+            endingLineNumber = "443">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -220,10 +172,58 @@
             filePath = "Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
             landmarkName = "deleteImage(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE55FA09-9144-400D-AA74-B23FA223008A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "failureView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "BE55FA09-9144-400D-AA74-B23FA223008A - 11b5c6b8d2edf358"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Memo_programmers.ImageURLInputPopupViewController.init() -&gt; Memo_programmers.ImageURLInputPopupViewController"
+                  moduleName = "Memo_programmers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "664">
+               </Location>
+               <Location
+                  uuid = "BE55FA09-9144-400D-AA74-B23FA223008A - 1f8435038163326f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Memo_programmers.ImageURLInputPopupViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Memo_programmers.ImageURLInputPopupViewController&gt;"
+                  moduleName = "Memo_programmers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Popup/ImageURLInputPopupViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "716">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

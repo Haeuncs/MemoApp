@@ -22,13 +22,12 @@ private enum Style {
 }
 class BottomViewController: BasePullDownViewController {
   
-  typealias BottomPopupTypes = Constant.BottomPopup
+  // MARK: - Properties
   
-  // Private
+  typealias BottomPopupTypes = Constant.BottomPopup
   private var tableViewHeightConstrants: NSLayoutConstraint?
   private var disposeBag = DisposeBag()
   private var tableData = [BottomCellData]()
-  
   private var selectedTitle: String?
   
   init(title: String) {
@@ -41,18 +40,17 @@ class BottomViewController: BasePullDownViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  // MARK: - Lifecycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     initView()
     bindRx()
   }
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-  }
-  // View ✨
+  
+  // MARK: - View ✨
+  
   func initView(){
     contentView.addSubview(tableView)
     tableView.snp.makeConstraints { (make) in
@@ -60,17 +58,20 @@ class BottomViewController: BasePullDownViewController {
       make.leading.trailing.equalTo(contentView)
       make.bottom.equalTo(contentView)
     }
+    // 추가된 item 만큼 높이를 설정
     tableViewHeightConstrants = tableView.heightAnchor.constraint(equalToConstant: CGFloat(Int(Style.Table.rowHeight) * self.tableData.count))
     tableViewHeightConstrants?.isActive = true
   }
-  // Bind 🏷
+  
+  // MARK: - Bind 🏷
+  
   func bindRx(){
     self.navView.doneButton.rx.tap
       .subscribe(onNext: { [weak self] (_) in
         self?.dismiss(animated: true, completion: nil)
       }).disposed(by: disposeBag)
   }
-
+  
   lazy var tableView: UITableView = {
     let view = UITableView()
     view.delegate = self
@@ -86,7 +87,10 @@ class BottomViewController: BasePullDownViewController {
   open func addAction(_ data: BottomCellData) {
     self.tableData.append(data)
   }
+  
 }
+
+// MARK: - UITableViewDelegate
 
 extension BottomViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -96,6 +100,7 @@ extension BottomViewController: UITableViewDelegate {
   }
 }
 
+// MARK: - UITableViewDataSource
 
 extension BottomViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

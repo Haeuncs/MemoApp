@@ -34,21 +34,20 @@ private enum Style {
     static let title: String = "계속하기"
   }
 }
+
 class TutorialViewController: UIViewController {
+  
+  // MARK: - Properties
   private var disposeBag = DisposeBag()
   
+  // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     initView()
     bindRx()
     setAppearance()
   }
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-  }
+  
   func setAppearance() {
     view.backgroundColor = Color.background
     tableView.backgroundColor = Color.background
@@ -56,8 +55,8 @@ class TutorialViewController: UIViewController {
     addButton.backgroundColor = Color.black
     addButton.setTitleColor(Color.background, for: .normal)
   }
-
-  // View ✨
+  
+  // MARK: - View ✨
   func initView(){
     view.addSubview(titleLabel)
     view.addSubview(tableView)
@@ -80,7 +79,7 @@ class TutorialViewController: UIViewController {
       make.bottom.equalTo(view).offset(-60)
     }
   }
-  // Bind 🏷
+  // MARK: - Bind 🏷
   func bindRx(){
     addButton.rx.tap
       .subscribe(onNext: {[weak self] (_) in
@@ -88,6 +87,7 @@ class TutorialViewController: UIViewController {
         
       }).disposed(by: disposeBag)
   }
+  
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -114,8 +114,10 @@ class TutorialViewController: UIViewController {
     button.layer.cornerRadius = Constant.UI.radius
     return button
   }()
-
+  
 }
+
+// MARK: - UITableViewDataSource
 
 extension TutorialViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
