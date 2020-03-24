@@ -28,6 +28,7 @@ protocol MemoViewModelOutputs {
   /// popup 에서 그리는 데이터
   var memoAddImage: [MemoEdit] {get}
   var error: PublishSubject<String> {get}
+  var memo: BehaviorRelay<MemoData> {get}
 }
 
 protocol MemoViewModelType {
@@ -50,28 +51,28 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     Constant.BottomPopup.MemoAddPhotoType.loadByURL
   ]
   
-  let memo: MemoData
+  let memo: BehaviorRelay<MemoData>
   let coreData: CoreDataModelType
   init(coreData: CoreDataModelType, memo: MemoData?) {
     self.coreData = coreData
-    if memo == nil {
-      self.memo = MemoData()
+    if let memoData = memo {
+      self.memo = BehaviorRelay(value: (memoData))
+      self.title = BehaviorRelay(value: memoData.title ?? "")
+      self.content = BehaviorRelay(value: memoData.memo ?? "")
+      self.imageArray = BehaviorRelay(value: memoData.imageArray ?? [])
+    }else {
+      self.memo = BehaviorRelay(value: (MemoData()))
       self.title = BehaviorRelay(value: "")
       self.content = BehaviorRelay(value: "")
       self.imageArray = BehaviorRelay(value: [])
-    }else {
-      self.memo = memo!
-      self.title = BehaviorRelay(value: memo!.title ?? "")
-      self.content = BehaviorRelay(value: memo!.memo ?? "")
-      self.imageArray = BehaviorRelay(value: memo!.imageArray ?? [])
     }
   }
   func add() -> Bool{
     let (bool, _) = coreData.inputs.add(newMemo:
       MemoData(title: self.title.value,
                memo: self.content.value,
-               date: self.memo.date,
-               identifier: self.memo.identifier,
+               date: self.memo.value.date,
+               identifier: self.memo.value.identifier,
                imageArray: self.imageArray.value))
     if !bool {
       self.error.onNext("저장 실패")
@@ -84,9 +85,9 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
   func update() -> Bool {
     let memoData =  MemoData(title: self.title.value,
                              memo: self.content.value,
-                             date: self.memo.date,
+                             date: self.memo.value.date,
                              modifyDate: Date(),
-                             identifier: self.memo.identifier,
+                             identifier: self.memo.value.identifier,
                              imageArray: self.imageArray.value)
     let (bool, _) = self.coreData.inputs.update(updateMemo: memoData)
     if !bool {
@@ -97,7 +98,7 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     return bool
   }
   func delete() -> Bool {
-    let (bool, _) = coreData.inputs.delete(identifier: self.memo.identifier!)
+    let (bool, _) = coreData.inputs.delete(identifier: self.memo.value.identifier!)
     if !bool {
       self.error.onNext("삭제 실패")
     } else {

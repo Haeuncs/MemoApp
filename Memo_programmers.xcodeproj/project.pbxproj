@@ -17,7 +17,6 @@
 		7D57E18823F83C3900397DE3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D57E18723F83C3900397DE3 /* CloudKit.framework */; };
 		7D57E18A23F840B000397DE3 /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57E18923F840B000397DE3 /* MemoViewModel.swift */; };
 		7D57E18E23F8537600397DE3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57E18D23F8537600397DE3 /* Date+.swift */; };
-		7D57E19123F862EB00397DE3 /* MemoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57E19023F862EB00397DE3 /* MemoEditViewModel.swift */; };
 		7D57E19C23F8F50E00397DE3 /* Memo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57E19A23F8F50E00397DE3 /* Memo+CoreDataProperties.swift */; };
 		7D57E19D23F8F50E00397DE3 /* Images+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57E19B23F8F50E00397DE3 /* Images+CoreDataProperties.swift */; };
 		7D6A8CD523F1AA21005E0FA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8CD423F1AA21005E0FA4 /* AppDelegate.swift */; };
@@ -95,7 +94,6 @@
 		7D57E18723F83C3900397DE3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7D57E18923F840B000397DE3 /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
 		7D57E18D23F8537600397DE3 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		7D57E19023F862EB00397DE3 /* MemoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewModel.swift; sourceTree = "<group>"; };
 		7D57E19A23F8F50E00397DE3 /* Memo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D57E19B23F8F50E00397DE3 /* Images+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Images+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D6A8CD123F1AA21005E0FA4 /* Memo_programmers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memo_programmers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,7 +248,6 @@
 		7D6A8CFC23F2DFF4005E0FA4 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
-				7D57E19023F862EB00397DE3 /* MemoEditViewModel.swift */,
 				7D6A8CF723F2DFAD005E0FA4 /* ImageURLInputPopupViewController.swift */,
 				7D9276702401107F00AFD435 /* ImageViewController.swift */,
 			);
@@ -261,11 +258,11 @@
 			isa = PBXGroup;
 			children = (
 				7D097C7723FC2AE300BAB7BB /* Constant.swift */,
+				7D260F3424035DF500CAD361 /* enumTypes.swift */,
+				7D9276912402941600AFD435 /* LoadingView.swift */,
+				7D92768F24027CE900AFD435 /* ToastMessage.swift */,
 				7D6A8D2623F43F6D005E0FA4 /* Extension */,
 				7D6A8D0623F2E2CD005E0FA4 /* Styles */,
-				7D92768F24027CE900AFD435 /* ToastMessage.swift */,
-				7D9276912402941600AFD435 /* LoadingView.swift */,
-				7D260F3424035DF500CAD361 /* enumTypes.swift */,
 			);
 			path = Utills;
 			sourceTree = "<group>";
@@ -560,7 +557,6 @@
 				7D92768A240258D200AFD435 /* Tutorial.swift in Sources */,
 				7D927677240167E400AFD435 /* UserDefaults+.swift in Sources */,
 				7D6A8CD523F1AA21005E0FA4 /* AppDelegate.swift in Sources */,
-				7D57E19123F862EB00397DE3 /* MemoEditViewModel.swift in Sources */,
 				7D9276712401107F00AFD435 /* ImageViewController.swift in Sources */,
 				7D9276942402A11A00AFD435 /* CoreDataManager.swift in Sources */,
 				7D6B902F23F80A700084ACE9 /* CALayer+.swift in Sources */,

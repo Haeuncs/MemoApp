@@ -28,7 +28,7 @@ private enum HomeConstants {
 class HomeViewController: BaseViewController {
   
   private var disposeBag = DisposeBag()
-  private var viewModel = HomeViewModel(coreData: CoreDataModel())
+  private var viewModel: HomeViewModelType = HomeViewModel(coreData: CoreDataModel())
   
 
   override func viewDidLoad() {

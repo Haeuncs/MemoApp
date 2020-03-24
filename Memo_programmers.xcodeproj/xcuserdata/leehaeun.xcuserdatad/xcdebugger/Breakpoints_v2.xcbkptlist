@@ -126,10 +126,42 @@
             filePath = "Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "openPhotoPicker()"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "openCamera()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C4E437A9-95DB-4461-801A-BD176D7785CA - a9e0722ac15cba00"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Memo_programmers.MemoDetailViewController.openCamera() -&gt; ()"
+                  moduleName = "Memo_programmers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "298"
+                  endingLineNumber = "298"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "C4E437A9-95DB-4461-801A-BD176D7785CA - 5b882df5cbefa95a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in Memo_programmers.MemoDetailViewController.openCamera() -&gt; ()"
+                  moduleName = "Memo_programmers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leehaeun/Memo_programmers/Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "299"
+                  endingLineNumber = "299"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -174,41 +206,23 @@
             filePath = "Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "93BFDD50-9B91-42A5-8A04-1245AB16536F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
-            landmarkName = "keyboardWillShow(_:)"
-            landmarkType = "7">
+            startingLineNumber = "444"
+            endingLineNumber = "444">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3F221B07-3A48-4A43-A266-A7D64AFC1B79"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Memo_programmers/ViewController/Memo/Detail/MemoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
-            landmarkName = "keyboardWillShow(_:)"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
+            landmarkName = "deleteImage(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

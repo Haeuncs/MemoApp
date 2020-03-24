@@ -22,12 +22,12 @@ protocol HomeViewModelOutputs {
   /// popup data
   var popupData: [MemoEdit] {get}
 }
-protocol HomeViewModelProtocol {
+protocol HomeViewModelType {
   var inputs: HomeViewModelInputs {get}
   var outputs: HomeViewModelOutputs {get}
 }
 
-class HomeViewModel: HomeViewModelInputs, HomeViewModelOutputs, HomeViewModelProtocol {
+class HomeViewModel: HomeViewModelInputs, HomeViewModelOutputs, HomeViewModelType {
   
   private let disposeBag = DisposeBag()
   

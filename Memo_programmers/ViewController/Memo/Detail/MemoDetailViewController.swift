@@ -23,30 +23,10 @@ enum MemoDetailType {
   case Read
 }
 /**
- 현재 메모 뷰에서 나타나는 팝업 이벤트 Type
- */
-enum MemoDetailPopupType {
-  case edit
-  case delete
-  case loadPhoto
-  case camera
-  case urlLoadImage
-}
-/**
- MemoDetailPopupType 에 따른 팝업 띄우기
- */
-protocol MemoDetailDelegate: class {
-  func memoDetailPopup(type: MemoDetailPopupType)
-}
-/**
  ImageURLInputViewController 에서 로드한 UIImage 가져오기
  */
 protocol MemoDetailLoadURLImageDelegate: class {
   func addLoadURLImage(image: UIImage)
-}
-
-protocol MemoDetailDeleteImageDelegate: class {
-  func deleteImage(index: Int)
 }
 
 class MemoDetailViewController: UIViewController {
@@ -75,7 +55,7 @@ class MemoDetailViewController: UIViewController {
   private var textViewHeight: NSLayoutConstraint?
   private var lastScrollOffset: CGFloat?
   private var memoTextViewHeight: CGFloat = 0
-  private var viewModel: MemoViewModel
+  private var viewModel: MemoViewModelType
   private var isKeyboardShow: Bool = false
   
   lazy var memoDetailView: MemoDetailView = {
@@ -180,23 +160,25 @@ class MemoDetailViewController: UIViewController {
       }).disposed(by: disposeBag)
     
     memoDetailView.navView.dotButton.rx.tap
-      .subscribe(onNext: { [weak self](_) in
-        self?.openMemoEditVC(memo: (self?.viewModel.memo)!)
+      .withLatestFrom(self.viewModel.outputs.memo)
+      .subscribe(onNext: { [weak self] (memo) in
+        self?.openMemoEditVC(memo: memo)
       }).disposed(by: disposeBag)
     
     memoDetailView.titleTextView.textField.rx.text
       .orEmpty
-      .bind(to: (self.viewModel.title))
+      .bind(to: (self.viewModel.inputs.title))
       .disposed(by: disposeBag)
     
     memoDetailView.memoTextView.textView.rx.text
       .orEmpty
-      .bind(to: (self.viewModel.content))
+      .bind(to: (self.viewModel.inputs.content))
       .disposed(by: disposeBag)
     
     memoDetailView.memoTextView.textView.rx
       .didBeginEditing
       .subscribe(onNext: { [weak self] (_) in
+//        self?.memoDetailView.setActiveMemoTextView()
         self?.memoTextViewDidBegin()
       }).disposed(by: disposeBag)
     
@@ -317,7 +299,7 @@ class MemoDetailViewController: UIViewController {
     }
   }
   func openImages(index: Int) {
-    let vc = ImageViewController(images: self.viewModel.imageArray.value.map {
+    let vc = ImageViewController(images: self.viewModel.inputs.imageArray.value.map {
       return $0.image
     }, selectedIndex: index)
     vc.modalPresentationStyle = .overFullScreen
@@ -350,9 +332,9 @@ class MemoDetailViewController: UIViewController {
   }
   /// 선택된 이미지를 삭제
   @objc func deleteImage(_ button: UIButton) {
-    var images = self.viewModel.imageArray.value
+    var images = self.viewModel.inputs.imageArray.value
     images.remove(at: button.tag)
-    self.viewModel.imageArray.accept(images)
+    self.viewModel.inputs.imageArray.accept(images)
     self.memoDetailView.photoCollect.performBatchUpdates({
       self.memoDetailView.photoCollect.deleteItems(at: [IndexPath(row: button.tag, section: 0)])
     }) { (finished) in
@@ -393,44 +375,9 @@ extension MemoDetailViewController: UITextViewDelegate {
   }
 }
 
-extension MemoDetailViewController: MemoDetailDelegate {
-  func memoDetailPopup(type: MemoDetailPopupType) {
-    switch type {
-    case .delete:
-      let (bool) = self.viewModel.inputs.delete()
-      if (bool) {
-        // 현재 표시되고 있는 뷰 (bottom popup vc)
-        weak var pvc = self.presentedViewController
-        pvc?.dismiss(animated: true) {
-          self.navigationController?.popViewController(animated: true)
-        }
-      }
-    case .edit:
-      weak var pvc = self.presentedViewController
-      pvc?.dismiss(animated: true, completion: {
-        self.currentDetailType = .Edit
-      })
-    case .camera:
-      self.openCamera()
-    case .urlLoadImage:
-      weak var pvc = self.presentedViewController
-      pvc?.dismiss(animated: true, completion: {
-        let vc = ImageURLInputPopupViewController()
-        vc.delegate = self
-        vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        self.present(vc, animated: true, completion: nil)
-      })
-    case .loadPhoto:
-      self.openPhotoPicker()
-    }
-  }
-}
-
-
 extension MemoDetailViewController: MemoDetailLoadURLImageDelegate {
   func addLoadURLImage(image: UIImage) {
-    self.viewModel.imageArray.accept((self.viewModel.imageArray.value ) + [Image(image: image, date: Date())])
+    self.viewModel.inputs.imageArray.accept((self.viewModel.inputs.imageArray.value ) + [Image(image: image, date: Date())])
     memoDetailView.photoCollect.reloadData()
   }
 }
@@ -440,13 +387,13 @@ extension MemoDetailViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if currentDetailType == MemoDetailType.Add ||
       currentDetailType == MemoDetailType.Edit {
-      if indexPath.row == self.viewModel.imageArray.value.count {
+      if indexPath.row == self.viewModel.inputs.imageArray.value.count {
         self.openPhotoVC()
       } else {
         self.openImages(index: indexPath.row)
       }
     } else {
-      if self.viewModel.imageArray.value.count != 0 {
+      if self.viewModel.inputs.imageArray.value.count != 0 {
         self.openImages(index: indexPath.row)
       }
     }
@@ -457,11 +404,11 @@ extension MemoDetailViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if currentDetailType == MemoDetailType.Add ||
       currentDetailType == MemoDetailType.Edit {
-      return (self.viewModel.imageArray.value.count ) + 1
-    } else if self.viewModel.imageArray.value.count == 0 {
+      return (self.viewModel.inputs.imageArray.value.count ) + 1
+    } else if self.viewModel.inputs.imageArray.value.count == 0 {
       return 1
     } else {
-      return (self.viewModel.imageArray.value.count )
+      return (self.viewModel.inputs.imageArray.value.count )
     }
   }
   
@@ -469,10 +416,10 @@ extension MemoDetailViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MemoDetailViewController.photoIdentifier, for: indexPath) as! MemoPhotoAddPhotoCell
     cell.deleteButton.tag = indexPath.row
     cell.deleteButton.addTarget(self, action: #selector(deleteImage(_:)), for: .touchUpInside)
-    if indexPath.row == self.viewModel.imageArray.value.count {
-      cell.configure(image: nil, type: self.currentDetailType ?? MemoDetailType.Add, count: self.viewModel.imageArray.value.count )
+    if indexPath.row == self.viewModel.inputs.imageArray.value.count {
+      cell.configure(image: nil, type: self.currentDetailType ?? MemoDetailType.Add, count: self.viewModel.inputs.imageArray.value.count )
     } else {
-      cell.configure(image: self.viewModel.imageArray.value[indexPath.row].image, type: self.currentDetailType ?? MemoDetailType.Add, count: self.viewModel.imageArray.value.count)
+      cell.configure(image: self.viewModel.inputs.imageArray.value[indexPath.row].image, type: self.currentDetailType ?? MemoDetailType.Add, count: viewModel.inputs.imageArray.value.count)
     }
     return cell
   }
@@ -482,9 +429,8 @@ extension MemoDetailViewController: UIImagePickerControllerDelegate, UINavigatio
   //MARK: UIImagePickerControllerDelegate
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let imageOrientaion = chosenImage.fixedOrientation() {
-      self.viewModel
-        .imageArray
-        .accept((self.viewModel.imageArray.value ) + [Image(image: imageOrientaion, date: Date())])
+      self.viewModel.inputs.imageArray
+        .accept((self.viewModel.inputs.imageArray.value ) + [Image(image: imageOrientaion, date: Date())])
       
       memoDetailView.photoCollect.reloadData()
     }
