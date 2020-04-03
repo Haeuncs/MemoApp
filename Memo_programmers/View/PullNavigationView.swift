@@ -13,17 +13,11 @@ class PullNavigationView: BaseView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-//    baseView.addSubview(imageView)
     baseView.addSubview(leftButton)
     baseView.addSubview(titleLabel)
     baseView.addSubview(doneButton)
     baseView.addSubview(lineView)
-//    imageView.snp.makeConstraints { (make) in
-//      make.top.equalTo(baseView).offset(4)
-//      make.centerX.equalTo(baseView)
-//      make.width.equalTo(34)
-//      make.height.equalTo(4)
-//    }
+
     titleLabel.snp.makeConstraints { (make) in
       make.center.equalTo(baseView)
     }

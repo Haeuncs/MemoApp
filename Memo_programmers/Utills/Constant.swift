@@ -62,4 +62,13 @@ enum Constant {
       static let delete: MemoEdit = MemoEdit(image: UIImage(named: "MoreDelete")!, title: "삭제")
     }
   }
+  
+  enum Authorize {
+    enum Camera {
+      static let data: PopupData = PopupData(body: "설정에서\n카메라 권한을 허용해주세요!\n(권한을 바꾸기 전 저장해주세요😮)", left: "취소", right: "설정으로", rightHandler: nil)
+    }
+    enum Photo {
+      static let data: PopupData = PopupData(body: "설정에서\n갤러리 권한을 허용해주세요!\n(권한을 바꾸기 전 저장해주세요😮)", left: "취소", right: "설정으로", rightHandler: nil)
+    }
+  }
 }

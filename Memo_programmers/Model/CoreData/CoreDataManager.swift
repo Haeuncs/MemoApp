@@ -14,11 +14,9 @@ import UIKit
 
 class CoreDataManager {
   
-  //1
   static let sharedManager = CoreDataManager()
-  private init() {} // Prevent clients from creating another instance.
+  private init() {} 
   
-  //2
   lazy var persistentContainer: NSPersistentContainer = {
     
     let container = NSPersistentContainer(name: "Memo_programmers")
@@ -31,7 +29,7 @@ class CoreDataManager {
     return container
   }()
   
-  //3
+
   func saveContext () {
     let context = CoreDataManager.sharedManager.persistentContainer.viewContext
     if context.hasChanges {
@@ -44,7 +42,7 @@ class CoreDataManager {
     }
   }
   
-  /*Insert*/
+  // Insert
   func add(newMemo: MemoData) -> (Bool, Error?){
     let managedContext = CoreDataManager.sharedManager.persistentContainer.viewContext
     
@@ -73,7 +71,7 @@ class CoreDataManager {
     }
   }
   
-  /*delete*/
+  // delete
   func delete(identifier: UUID) -> (Bool, Error?) {
 
     let managedContext = CoreDataManager.sharedManager.persistentContainer.viewContext
@@ -105,6 +103,7 @@ class CoreDataManager {
     }
   }
   
+  // update
   func update(updateMemo: MemoData) -> (Bool, Error?){
     let managedContext = CoreDataManager.sharedManager.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Memo")
@@ -138,6 +137,7 @@ class CoreDataManager {
     }
   }
 
+  // fetch all memo
   func fetchAllMemos() -> [Memo]?{
     let managedContext = CoreDataManager.sharedManager.persistentContainer.viewContext
     let fetchRequest2 = NSFetchRequest<Memo>(entityName: "Memo")
@@ -166,6 +166,7 @@ class CoreDataManager {
   }
 
   
+  // flush
   func flushData() {
     
     let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Memo")

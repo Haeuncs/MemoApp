@@ -35,6 +35,9 @@ extension UIFont {
   public static var m18: UIFont {
     return UIFont.systemFont(ofSize: 18, weight: .medium)
   }
+  public static var m16: UIFont {
+    return UIFont.systemFont(ofSize: 16, weight: .medium)
+  }
   public static var m14: UIFont {
     return UIFont.systemFont(ofSize: 14, weight: .medium)
   }

@@ -46,3 +46,4 @@ enum MemoDetailType {
   case Add
   case Read
 }
+

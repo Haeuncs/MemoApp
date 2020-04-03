@@ -28,12 +28,10 @@ private enum HomeConstants {
 class HomeViewController: BaseViewController {
   
   // MARK: - Properties
-
   private var disposeBag = DisposeBag()
   private var viewModel: HomeViewModelType = HomeViewModel(coreData: CoreDataModel())
   
   // MARK: - Lifecycle
-
   override func viewDidLoad() {
     super.viewDidLoad()
     initView()
@@ -57,7 +55,6 @@ class HomeViewController: BaseViewController {
   }
   
   // MARK: - View ✨
-
   func setAppearance(){
     view.backgroundColor = Color.background
     contentView.backgroundColor = Color.background
@@ -86,7 +83,6 @@ class HomeViewController: BaseViewController {
   }
   
   // MARK: - Bind 🏷
-
   func bindRx(){
     
     self.navView.addButton.rx.tap
@@ -194,7 +190,6 @@ extension HomeViewController {
   }
 
   // MARK: - Popup
-
   func shareMemo(text: String) {
     let textToShare = text
     let objectsToShare = [textToShare] as [Any]

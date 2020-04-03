@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import Photos
 
 /**
  ImageURLInputViewController 에서 로드한 UIImage 가져오기
@@ -23,6 +24,7 @@ class MemoDetailViewController: UIViewController {
   static let photoIdentifier = "DetailsCollectionViewCell"
   
   // MARK: - Properties
+  
   private typealias UI = Constant.UI
   private var viewBottomConstrant: NSLayoutConstraint?
   private var textViewHeight: NSLayoutConstraint?
@@ -50,6 +52,7 @@ class MemoDetailViewController: UIViewController {
   }
   
   // MARK: - Init
+  
   init(type: MemoDetailType, coreData: CoreDataModelType, memoData: MemoData?) {
     self.viewModel = MemoViewModel(coreData: coreData, memo: memoData)
     super.init(nibName: nil, bundle: nil)
@@ -104,6 +107,7 @@ class MemoDetailViewController: UIViewController {
   }
   
   // MARK: - View ✨
+  
   func initView(){
     self.view.addSubview(memoDetailView)
     memoDetailView.scrollView.delegate = self
@@ -122,6 +126,7 @@ class MemoDetailViewController: UIViewController {
     
   }
   // MARK: - Bind 🏷
+  
   func bindRx(){
     self.viewModel.outputs.error
       .subscribe(onNext: { (string) in
@@ -226,9 +231,73 @@ class MemoDetailViewController: UIViewController {
       }
     }
   }
-
+  
+  func checkCameraAuthorize() {
+    typealias PopupConstant = Constant.Authorize.Camera
+    
+    let cameraMediaType = AVMediaType.video
+    let status = AVCaptureDevice.authorizationStatus(for: cameraMediaType)
+    
+    switch status {
+    case .notDetermined:
+      AVCaptureDevice.requestAccess(for: .video) { (_) in
+        self.checkCameraAuthorize()
+      }
+    case .restricted, .denied:
+      let data = PopupData(body: PopupConstant.data.body,
+                           left: PopupConstant.data.left,
+                           right: PopupConstant.data.right,
+                           rightHandler: { () in
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                              return
+                            }
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                              UIApplication.shared.open(settingsUrl, completionHandler: { _ in self.checkCameraAuthorize()})
+                            }
+      })
+      DispatchQueue.main.async {
+        self.present(PopupViewController(data: data), animated: true)
+      }
+    case .authorized:
+      self.openCamera()
+    @unknown default:
+      break
+    }
+  }
+  
+  func checkPhotoAuthorize() {
+    typealias PopupConstant = Constant.Authorize.Photo
+    
+    let status = PHPhotoLibrary.authorizationStatus()
+    switch status {
+    case .authorized:
+      self.openPhotoPicker()
+    case .denied, .restricted :
+      let data = PopupData(body: PopupConstant.data.body,
+                           left: PopupConstant.data.left,
+                           right: PopupConstant.data.right,
+                           rightHandler: { () in
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                              return
+                            }
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                              UIApplication.shared.open(settingsUrl, completionHandler: { _ in self.checkPhotoAuthorize()})
+                            }
+      })
+      DispatchQueue.main.async {
+        self.present(PopupViewController(data: data), animated: true)
+      }
+    case .notDetermined:
+      PHPhotoLibrary.requestAuthorization { (_) in
+        self.checkPhotoAuthorize()
+      }
+    @unknown default:
+      break
+    }
+  }
+  
   // MARK: - Popup
-
+  
   func shareMemo(text: String) {
     let textToShare = text
     let objectsToShare = [textToShare] as [Any]
@@ -259,10 +328,10 @@ class MemoDetailViewController: UIViewController {
     let memoAddImage = Constant.BottomPopup.MemoAddPhotoType.self
     let vc = BottomViewController(title: memoAddImage.typeTitle)
     vc.addAction(BottomCellData(cellData: memoAddImage.loadByCamera, handler: {
-      self.openCamera()
+      self.checkCameraAuthorize()
     }))
     vc.addAction(BottomCellData(cellData: memoAddImage.loadByGallery, handler: {
-      self.openPhotoPicker()
+      self.checkPhotoAuthorize()
     }))
     vc.addAction(BottomCellData(cellData: memoAddImage.loadByURL, handler: {
       let vc = ImageURLInputPopupViewController()
@@ -274,29 +343,23 @@ class MemoDetailViewController: UIViewController {
   
   // MARK: - Open Gallery & Camera
   
-  func openPhotoPicker(){
-    let picker: UIImagePickerController = UIImagePickerController()
-    picker.delegate = self
-    picker.allowsEditing = false
-    picker.sourceType = .photoLibrary
+  func openPhotoPicker() {
     DispatchQueue.main.async {
-      weak var pvc = self.presentedViewController
-      pvc?.dismiss(animated: true) {
-        self.present(picker, animated: true, completion: nil)
-      }
+      let picker: UIImagePickerController = UIImagePickerController()
+      picker.delegate = self
+      picker.allowsEditing = false
+      picker.sourceType = .photoLibrary
+      self.present(picker, animated: true, completion: nil)
     }
   }
   
-  func openCamera(){
-    let picker: UIImagePickerController = UIImagePickerController()
-    picker.delegate = self
-    picker.allowsEditing = false
-    picker.sourceType = .camera
+  func openCamera() {
     DispatchQueue.main.async {
-      weak var pvc = self.presentedViewController
-      pvc?.dismiss(animated: true) {
-        self.present(picker, animated: true, completion: nil)
-      }
+      let picker: UIImagePickerController = UIImagePickerController()
+      picker.delegate = self
+      picker.allowsEditing = false
+      picker.sourceType = .camera
+      self.present(picker, animated: true, completion: nil)
     }
   }
   
@@ -329,7 +392,7 @@ class MemoDetailViewController: UIViewController {
       self.view.layoutIfNeeded()
     }
   }
-    
+  
   @objc func deleteImage(_ button: UIButton) {
     var images = self.viewModel.inputs.imageArray.value
     images.remove(at: button.tag)

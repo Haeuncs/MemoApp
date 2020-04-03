@@ -14,8 +14,16 @@ class HomeMemoTableCell: BaseTableCell {
   typealias Style = Constant.MemoHome.Cell
   
   func configure(title: String?, memo: String?, date: Date?, image: UIImage? = nil) {
-    self.memoLabel.text = memo
-    self.titleLabel.text = title
+    if memo?.count ?? 0 <= 0 {
+      self.memoLabel.text = "내용 없음"
+    } else {
+      self.memoLabel.text = memo
+    }
+    if title?.count ?? 0 <= 0 {
+      self.titleLabel.text = "무제"
+    } else {
+      self.titleLabel.text = title
+    }
     self.dateLabel.text = date!.korDateString()
     self.memoImageView.image = image
   }

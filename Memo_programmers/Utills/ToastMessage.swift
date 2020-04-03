@@ -13,10 +13,6 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-//enum ToastType {
-//  case warning
-//  case success
-//}
 class ToastMessage: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)

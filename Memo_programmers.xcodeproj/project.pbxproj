@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7D097C7823FC2AE300BAB7BB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D097C7723FC2AE300BAB7BB /* Constant.swift */; };
+		7D11BC8824374F2800E58AC4 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D11BC8724374F2800E58AC4 /* PopupViewController.swift */; };
+		7D11BC8A2437756400E58AC4 /* PopupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D11BC892437756400E58AC4 /* PopupData.swift */; };
 		7D260F3524035DF500CAD361 /* enumTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D260F3424035DF500CAD361 /* enumTypes.swift */; };
 		7D57E17423F81DE400397DE3 /* Images+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57E17023F81DE400397DE3 /* Images+CoreDataClass.swift */; };
 		7D57E17623F81DE400397DE3 /* Memo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D57E17223F81DE400397DE3 /* Memo+CoreDataClass.swift */; };
@@ -54,7 +56,6 @@
 		7D9276692400DBE600AFD435 /* HomeEmptyMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9276682400DBE600AFD435 /* HomeEmptyMemoView.swift */; };
 		7D92766B2400E05000AFD435 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92766A2400E05000AFD435 /* UICollectionView+.swift */; };
 		7D92766D2400E12A00AFD435 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92766C2400E12A00AFD435 /* UITableView+.swift */; };
-		7D92766F2400EB3300AFD435 /* NeomorphismButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92766E2400EB3300AFD435 /* NeomorphismButton.swift */; };
 		7D9276712401107F00AFD435 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9276702401107F00AFD435 /* ImageViewController.swift */; };
 		7D9276732401152900AFD435 /* URLFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9276722401152900AFD435 /* URLFailureView.swift */; };
 		7D927677240167E400AFD435 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D927676240167E400AFD435 /* UserDefaults+.swift */; };
@@ -84,6 +85,8 @@
 
 /* Begin PBXFileReference section */
 		7D097C7723FC2AE300BAB7BB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		7D11BC8724374F2800E58AC4 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		7D11BC892437756400E58AC4 /* PopupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupData.swift; sourceTree = "<group>"; };
 		7D260F3424035DF500CAD361 /* enumTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enumTypes.swift; sourceTree = "<group>"; };
 		7D57E17023F81DE400397DE3 /* Images+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Images+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D57E17223F81DE400397DE3 /* Memo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -129,7 +132,6 @@
 		7D9276682400DBE600AFD435 /* HomeEmptyMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyMemoView.swift; sourceTree = "<group>"; };
 		7D92766A2400E05000AFD435 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		7D92766C2400E12A00AFD435 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
-		7D92766E2400EB3300AFD435 /* NeomorphismButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeomorphismButton.swift; sourceTree = "<group>"; };
 		7D9276702401107F00AFD435 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		7D9276722401152900AFD435 /* URLFailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLFailureView.swift; sourceTree = "<group>"; };
 		7D927676240167E400AFD435 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -172,6 +174,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D11BC8624374F1A00E58AC4 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				7D11BC8724374F2800E58AC4 /* PopupViewController.swift */,
+				7D11BC892437756400E58AC4 /* PopupData.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
 		7D57E18623F83C3900397DE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +229,7 @@
 		7D6A8CEB23F2DCB0005E0FA4 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7D11BC8624374F1A00E58AC4 /* Popup */,
 				7D927688240258C300AFD435 /* Tutorial */,
 				7D92767F2402430300AFD435 /* BotoomViewController */,
 				7D92765723FEB9E600AFD435 /* Home */,
@@ -300,7 +312,6 @@
 				7D6A8D1F23F2FD48005E0FA4 /* MemoTextView.swift */,
 				7D92765D240017DE00AFD435 /* PopButton.swift */,
 				7D6A8D2C23F57F69005E0FA4 /* PullNavigationView.swift */,
-				7D92766E2400EB3300AFD435 /* NeomorphismButton.swift */,
 				7D9276722401152900AFD435 /* URLFailureView.swift */,
 				7D92767D2401820900AFD435 /* DismissButton.swift */,
 			);
@@ -505,14 +516,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D11BC8824374F2800E58AC4 /* PopupViewController.swift in Sources */,
 				7D57E18423F8282900397DE3 /* CoreDataModel.swift in Sources */,
 				7D097C7823FC2AE300BAB7BB /* Constant.swift in Sources */,
-				7D92766F2400EB3300AFD435 /* NeomorphismButton.swift in Sources */,
 				7D9276922402941600AFD435 /* LoadingView.swift in Sources */,
 				7D6A8D2A23F452FA005E0FA4 /* MemoPopupCell.swift in Sources */,
 				7D92766D2400E12A00AFD435 /* UITableView+.swift in Sources */,
 				7D6A8CEF23F2DE89005E0FA4 /* HomeViewController.swift in Sources */,
 				7D57E18223F824A900397DE3 /* HomeViewModel.swift in Sources */,
+				7D11BC8A2437756400E58AC4 /* PopupData.swift in Sources */,
 				7D92769024027CE900AFD435 /* ToastMessage.swift in Sources */,
 				7D6A8D0823F2E2D9005E0FA4 /* Colors.swift in Sources */,
 				7D6A8D2823F43F79005E0FA4 /* UIViewController+.swift in Sources */,

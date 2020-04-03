@@ -12,9 +12,10 @@ public enum BottomCellStyle {
   case selected
   case `default`
 }
+
 public struct BottomCellData {
   
-  var cellData: MemoEdit
+  fileprivate(set) var cellData: MemoEdit
   public fileprivate(set) var style = BottomCellStyle.default
   public fileprivate(set) var handler: (() -> Void)
   

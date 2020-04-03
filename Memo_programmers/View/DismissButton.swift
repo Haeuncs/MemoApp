@@ -20,6 +20,7 @@ private enum Style {
     static let margin_left: CGFloat = 6
   }
 }
+
 class DismissButton: BaseButton {
   
   override init(frame: CGRect) {
@@ -37,7 +38,6 @@ class DismissButton: BaseButton {
       make.trailing.equalTo(self)
       make.centerY.equalTo(self)
     }
-    
   }
   
   required init?(coder: NSCoder) {
