@@ -14,7 +14,7 @@ import RxCocoa
 
 class BasePullDownViewController: UIViewController {
   private var disposeBag = DisposeBag()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setAppearance()
@@ -95,6 +95,3 @@ class BasePullDownViewController: UIViewController {
   }()
 
 }
-
-
-

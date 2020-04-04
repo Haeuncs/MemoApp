@@ -6,7 +6,6 @@
 //  Copyright © 2020 LEE HAEUN. All rights reserved.
 //
 
-
 import UIKit
 import SnapKit
 
@@ -24,7 +23,7 @@ class URLFailureView: UIView {
     super.init(frame: frame)
     initView()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -61,6 +60,5 @@ class URLFailureView: UIView {
     label.text = Style.Light.text
     return label
   }()
-  
-}
 
+}

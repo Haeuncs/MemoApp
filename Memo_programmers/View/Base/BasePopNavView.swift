@@ -12,15 +12,15 @@ import SnapKit
 class BasePopNavView: UIView {
   func configure(type: MemoDetailType) {
     switch type {
-    case .Edit:
+    case .edit:
       self.dotButton.isHidden = true
       self.titleButton.isHidden = false
       self.titleButton.setTitle("수정 완료", for: .normal)
-    case .Add:
+    case .add:
       self.dotButton.isHidden = true
       self.titleButton.isHidden = false
       self.titleButton.setTitle("저장", for: .normal)
-    case .Read:
+    case .read:
       self.dotButton.setImage(UIImage(named: "dot")?.withRenderingMode(.alwaysTemplate), for: .normal)
       self.dotButton.isHidden = false
       self.titleButton.isHidden = true
@@ -28,7 +28,7 @@ class BasePopNavView: UIView {
   }
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
+
     self.addSubview(titleLabel)
     self.addSubview(popButton)
     self.addSubview(dotButton)
@@ -54,11 +54,11 @@ class BasePopNavView: UIView {
     //      make.trailing.bottom.equalTo(self)
     //    }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  func setAppearance(){
+  func setAppearance() {
     self.popButton.tintColor = Color.black
     dotButton.imageView?.tintColor = Color.black
     titleButton.setTitleColor(Color.black, for: .normal)
@@ -93,5 +93,5 @@ class BasePopNavView: UIView {
     label.font = .sb12
     return label
   }()
-  
+
 }

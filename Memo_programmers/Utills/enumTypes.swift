@@ -42,8 +42,7 @@ enum ImageURLType {
  - Read: 기존 메모 열람
  */
 enum MemoDetailType {
-  case Edit
-  case Add
-  case Read
+  case edit
+  case add
+  case read
 }
-

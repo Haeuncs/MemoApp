@@ -9,38 +9,37 @@
 import XCTest
 import CoreData
 @testable import Memo_programmers
-
+// swiftlint:disable all
 /**
  앱에서 사용하는 코어 데이터 테스트
  */
 class Memo_programmersTests: XCTestCase {
-  
+
   var coreDataManager: CoreDataManager!
-  
+
   override func setUp() {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     coreDataManager = CoreDataManager.sharedManager
-    
+
   }
-  
+
   override func tearDown() {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
   }
-  
+
   func testExample() {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
   }
-  
+
   func testPerformanceExample() {
     // This is an example of a performance test case.
     measure {
       // Put the code you want to measure the time of here.
     }
   }
-  
-  
-  func test_init_coreDataManager(){
+
+  func test_init_coreDataManager() {
     let instance = CoreDataManager.sharedManager
     XCTAssertNotNil( instance )
   }
@@ -63,7 +62,7 @@ class Memo_programmersTests: XCTestCase {
     XCTAssertNotNil(coreDataManager.add(newMemo: memo_2))
     XCTAssertNotNil(coreDataManager.add(newMemo: memo_3))
     XCTAssertNotNil(coreDataManager.add(newMemo: memo_4))
-    
+
     XCTAssertEqual(coreDataManager.fetchAllMemos()?.count, countBeforeAdd + 4)
   }
   /**
@@ -73,11 +72,11 @@ class Memo_programmersTests: XCTestCase {
     let testUUID = UUID()
     let testMemo = MemoData(title: "test", memo: "test", date: Date(), identifier: testUUID)
     XCTAssertNotNil(coreDataManager.add(newMemo: testMemo))
-    
+
     let countMemoAfterAdd = coreDataManager.fetchAllMemos()?.count ?? 0
-    
+
     XCTAssertNotNil(coreDataManager.delete(identifier: testUUID))
-    
+
     XCTAssertEqual((coreDataManager.fetchAllMemos()?.count ?? 0), countMemoAfterAdd - 1)
   }
   /**
@@ -85,13 +84,14 @@ class Memo_programmersTests: XCTestCase {
    */
   func test_update() {
     let firstMemo = coreDataManager.fetchAllMemos()?.first
-    
+
     let checkUpdateTitle = "update"
     firstMemo?.title = checkUpdateTitle
     XCTAssertNotNil(coreDataManager.update(updateMemo: MemoData(title: checkUpdateTitle, memo: firstMemo?.memo, date: firstMemo?.date, identifier: firstMemo?.identifier)))
-    
+
     let firstMemoAfterUpdate = coreDataManager.fetchAllMemos()?.first
 
     XCTAssertEqual(firstMemoAfterUpdate?.title, checkUpdateTitle)
   }
 }
+// swiftlint:enable all

@@ -12,8 +12,11 @@ import SnapKit
 class MemoTextFieldView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.backgroundColor = Constant.UI.backgroundColor
     
+    setAppearance()
+    
+    self.backgroundColor = Color.background
+
     self.addSubview(titleLabel)
     self.addSubview(stackView)
     titleLabel.snp.makeConstraints { (make) in
@@ -30,8 +33,9 @@ class MemoTextFieldView: UIView {
     lineView.snp.makeConstraints { (make) in
       make.height.equalTo(2)
     }
+    
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -46,7 +50,7 @@ class MemoTextFieldView: UIView {
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = .sb18
+    label.font = .sb14
     label.textColor = Color.black
     return label
   }()

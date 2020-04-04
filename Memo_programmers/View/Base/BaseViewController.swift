@@ -15,11 +15,11 @@ import RxCocoa
  마진 적용 베이스 뷰컨트롤러
  */
 class BaseViewController: UIViewController {
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = Constant.UI.backgroundColor
-    
+    view.backgroundColor = Color.background
+
     navigationController?.navigationBar.isHidden = true
     self.setupHideKeyboardOnTap()
     view.addSubview(contentView)

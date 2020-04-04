@@ -32,22 +32,21 @@ protocol CoreDataModelType {
 }
 
 class CoreDataModel: CoreDataModelInputs, CoreDataModelOutputs, CoreDataModelType {
-  
+
   var inputs: CoreDataModelInputs {return self}
-  var outputs: CoreDataModelOutputs{return self}
-  
+  var outputs: CoreDataModelOutputs {return self}
+
   var memos: PublishSubject<[MemoData]>
-  
+
   private var entityName = "Memo"
-  
+
   init() {
     self.memos = PublishSubject()
   }
-  
-  
+
   /// coredata에서 memo 저장된 순서로 fetch
   func getMemos() {
-    
+
     var fetchMemoDataArray: [MemoData] = []
     if let result = CoreDataManager.sharedManager.fetchAllMemos() {
       for data in result {
@@ -66,7 +65,7 @@ class CoreDataModel: CoreDataModelInputs, CoreDataModelOutputs, CoreDataModelTyp
             uiImageArr.append(structImage)
           }
         }
-        
+
         let tempData: MemoData = MemoData(title: data.title,
                                           memo: data.memo,
                                           date: data.date,
@@ -78,18 +77,17 @@ class CoreDataModel: CoreDataModelInputs, CoreDataModelOutputs, CoreDataModelTyp
     }
     self.memos.onNext(fetchMemoDataArray)
   }
-  func add(newMemo: MemoData) -> (Bool, Error?){
+  func add(newMemo: MemoData) -> (Bool, Error?) {
     return CoreDataManager.sharedManager.add(newMemo: newMemo)
   }
-  
+
   /// identifier 로 메모 찾아 삭제
   func delete(identifier: UUID) -> (Bool, Error?) {
     return CoreDataManager.sharedManager.delete(identifier: identifier)
   }
-  
-  
-  func update(updateMemo: MemoData) -> (Bool, Error?){
+
+  func update(updateMemo: MemoData) -> (Bool, Error?) {
     return CoreDataManager.sharedManager.update(updateMemo: updateMemo)
   }
-  
+
 }

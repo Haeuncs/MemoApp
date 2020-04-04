@@ -12,12 +12,12 @@ import SnapKit
 class MemoTextView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
+
     self.addSubview(titleLabel)
     self.addSubview(baseView)
     baseView.addSubview(textView)
     baseView.addSubview(lineView)
-    
+
     titleLabel.snp.makeConstraints { (make) in
       make.top.leading.trailing.equalTo(self)
     }
@@ -37,7 +37,7 @@ class MemoTextView: UIView {
       make.bottom.equalTo(baseView)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -53,7 +53,7 @@ class MemoTextView: UIView {
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = .sb18
+    label.font = .sb14
     label.textColor = Color.black
     return label
   }()
@@ -64,7 +64,7 @@ class MemoTextView: UIView {
   }()
   lazy var textView: UITextView = {
     let text = UITextView()
-    text.backgroundColor = Constant.UI.backgroundColor
+    text.backgroundColor = Color.background
     text.translatesAutoresizingMaskIntoConstraints = true
     text.isScrollEnabled = false
     text.textColor = Color.black

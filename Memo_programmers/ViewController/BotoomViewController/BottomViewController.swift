@@ -21,37 +21,37 @@ private enum Style {
   }
 }
 class BottomViewController: BasePullDownViewController {
-  
+
   // MARK: - Properties
-  
+
   typealias BottomPopupTypes = Constant.BottomPopup
   private var tableViewHeightConstrants: NSLayoutConstraint?
   private var disposeBag = DisposeBag()
   private var tableData = [BottomCellData]()
   private var selectedTitle: String?
-  
+
   init(title: String) {
     super.init(nibName: nil, bundle: nil)
     self.modalPresentationStyle = .overFullScreen
     self.modalTransitionStyle = .crossDissolve
     self.navView.titleLabel.text = title
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   // MARK: - Lifecycle
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     initView()
     bindRx()
   }
-  
+
   // MARK: - View ✨
-  
-  func initView(){
+
+  func initView() {
     contentView.addSubview(tableView)
     tableView.snp.makeConstraints { (make) in
       make.top.equalTo(navView.snp.bottom)
@@ -62,16 +62,16 @@ class BottomViewController: BasePullDownViewController {
     tableViewHeightConstrants = tableView.heightAnchor.constraint(equalToConstant: CGFloat(Int(Style.Table.rowHeight) * self.tableData.count))
     tableViewHeightConstrants?.isActive = true
   }
-  
+
   // MARK: - Bind 🏷
-  
-  func bindRx(){
+
+  func bindRx() {
     self.navView.doneButton.rx.tap
       .subscribe(onNext: { [weak self] (_) in
         self?.dismiss(animated: true, completion: nil)
       }).disposed(by: disposeBag)
   }
-  
+
   lazy var tableView: UITableView = {
     let view = UITableView()
     view.delegate = self
@@ -83,11 +83,11 @@ class BottomViewController: BasePullDownViewController {
     view.register(MemoPopupCell.self, forCellReuseIdentifier: "cell")
     return view
   }()
-  
+
   open func addAction(_ data: BottomCellData) {
     self.tableData.append(data)
   }
-  
+
 }
 
 // MARK: - UITableViewDelegate
@@ -106,11 +106,13 @@ extension BottomViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.tableData.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MemoPopupCell
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? MemoPopupCell else {
+      return UITableViewCell()
+    }
     let data = self.tableData[indexPath.row]
-    
+
     if data.style == .selected {
       cell.configure(data: data.cellData, isSelected: true)
     } else {

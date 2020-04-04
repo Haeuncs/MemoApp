@@ -14,11 +14,11 @@ class ImageCollectionCell: UICollectionViewCell {
     super.init(frame: frame)
     initView()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   func initView() {
     self.addSubview(photoImage)
     photoImage.snp.makeConstraints { (make) in

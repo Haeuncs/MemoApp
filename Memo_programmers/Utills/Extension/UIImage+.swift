@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+// swiftlint:disable all
 extension UIImage {
 
   /// Fix image orientaton to protrait up

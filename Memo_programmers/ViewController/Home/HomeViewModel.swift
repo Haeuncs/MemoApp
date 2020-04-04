@@ -26,12 +26,12 @@ protocol HomeViewModelType {
 }
 
 class HomeViewModel: HomeViewModelInputs, HomeViewModelOutputs, HomeViewModelType {
-  
+
   // MARK: - Private
   private let disposeBag = DisposeBag()
-  
+
   let coreData: CoreDataModelType
-  
+
   // MARK: - Init
   init(coreData: CoreDataModelType) {
     self.coreData = coreData
@@ -39,28 +39,28 @@ class HomeViewModel: HomeViewModelInputs, HomeViewModelOutputs, HomeViewModelTyp
       self.memos.accept(data)
     }).disposed(by: disposeBag)
   }
-  
+
   // MARK: - Inputs
   func getMemo() {
     self.coreData.inputs.getMemos()
   }
-  
+
   func deleteMemo(identifier: UUID?) {
     if let data = identifier {
-      let _ = self.coreData.inputs.delete(identifier: data)
+      _ = self.coreData.inputs.delete(identifier: data)
     } else {
       //error처리
     }
   }
-  
+
   func flushData() {
     CoreDataManager.sharedManager.flushData()
     getMemo()
   }
-  
+
   // MARK: - Outputs
   var memos: BehaviorRelay<[MemoData]> = BehaviorRelay(value: [])
-  
+
   var inputs: HomeViewModelInputs { return self }
   var outputs: HomeViewModelOutputs { return self }
 }

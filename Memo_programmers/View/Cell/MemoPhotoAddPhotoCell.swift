@@ -25,9 +25,9 @@ private enum Style {
 }
 
 class MemoPhotoAddPhotoCell: UICollectionViewCell {
-    func configure(image: UIImage?, type: MemoDetailType, count: Int){
+    func configure(image: UIImage?, type: MemoDetailType, count: Int) {
     if image == nil {
-      if type == .Read && count == 0{
+      if type == .read && count == 0 {
         addImage.image = Style.Image.EmptyImage
         addLabel.text = Style.Text.EmptyImage
       } else {
@@ -41,11 +41,11 @@ class MemoPhotoAddPhotoCell: UICollectionViewCell {
       self.stackView.isHidden = true
       self.imageView.isHidden = false
       self.imageView.image = image!
-      
+
       switch type {
-      case .Add, .Edit:
+      case .add, .edit:
         self.deleteButton.isHidden = false
-      case .Read:
+      case .read:
         self.deleteButton.isHidden = true
       }
 
@@ -57,7 +57,7 @@ class MemoPhotoAddPhotoCell: UICollectionViewCell {
     self.addSubview(stackView)
     self.addSubview(deleteButton)
     baseView.addSubview(imageView)
-    
+
     baseView.snp.makeConstraints { (make) in
       make.top.equalTo(self)
       make.leading.equalTo(self)
@@ -92,7 +92,7 @@ class MemoPhotoAddPhotoCell: UICollectionViewCell {
     view.translatesAutoresizingMaskIntoConstraints = false
     view.layer.shadow(shadow: Constant.UI.shadow)
     view.layer.cornerRadius = Constant.UI.radius
-    view.backgroundColor = Constant.UI.backgroundColor
+    view.backgroundColor = Color.background
     return view
   }()
   lazy var imageView: UIImageView = {

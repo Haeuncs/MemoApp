@@ -7,30 +7,29 @@
 //
 
 import UIKit
-
+// swiftlint:disable all
 enum Constant {
   enum UI {
-    static let backgroundColor: UIColor = Color.background
     static let radius: CGFloat = 12
     static let shadow: Shadow = Shadow(color: Color.black, alpha: 0.16, x: 0, y: 3, blur: 6)
     @available(iOS 11.0, *)
     static let safeInsetBottom: CGFloat = UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? 0
     @available(iOS 10.0, *)
-    static let safeInsetBottom_iOS10: CGFloat = UIApplication.shared.keyWindow?.rootViewController?.bottomLayoutGuide.length ?? 0
-    
+    static let safeInsetBottomiOS10: CGFloat = UIApplication.shared.keyWindow?.rootViewController?.bottomLayoutGuide.length ?? 0
+
     static let animationDuration: TimeInterval = 0.33
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height
-    
+
     enum Size {
       static let margin: CGFloat = 16.0
     }
-    
+
     enum NavigationBar {
       static let height: CGFloat = 50
     }
   }
-  
+
   enum MemoHome {
     enum Cell {
       static let dividerLineHeight: CGFloat = 1
@@ -39,7 +38,7 @@ enum Constant {
       static let imageHeight: CGFloat = 90
     }
   }
-  
+
   enum BottomPopup {
     enum MemoOrderType {
       static let typeTitle: String = "정렬"
@@ -47,14 +46,14 @@ enum Constant {
       static let createDate: MemoEdit = MemoEdit(image: UIImage(named: "orderAddCalender")!, title: "만든 날짜")
       static let modifyDate: MemoEdit = MemoEdit(image: UIImage(named: "orderCanlendar")!, title: "수정한 날짜")
     }
-    
+
     enum MemoAddPhotoType {
       static let typeTitle: String = "사진 추가"
       static let loadByGallery: MemoEdit = MemoEdit(image: UIImage(named: "LoadGallery")!, title: "사진 불러오기")
       static let loadByCamera: MemoEdit = MemoEdit(image: UIImage(named: "Camera")!, title: "카메라로 찍기")
       static let loadByURL: MemoEdit = MemoEdit(image: UIImage(named: "AddByURL")!, title: "URL 로 입력하기")
     }
-    
+
     enum MemoEditType {
       static let typeTitle: String = "메모"
       static let share: MemoEdit = MemoEdit(image: UIImage(named: "orderTitle")!, title: "메모 공유")
@@ -62,7 +61,7 @@ enum Constant {
       static let delete: MemoEdit = MemoEdit(image: UIImage(named: "MoreDelete")!, title: "삭제")
     }
   }
-  
+
   enum Authorize {
     enum Camera {
       static let data: PopupData = PopupData(body: "설정에서\n카메라 권한을 허용해주세요!\n(권한을 바꾸기 전 저장해주세요😮)", left: "취소", right: "설정으로", rightHandler: nil)
@@ -72,3 +71,4 @@ enum Constant {
     }
   }
 }
+// swiftlint:enable all

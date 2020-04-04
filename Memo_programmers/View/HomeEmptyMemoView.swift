@@ -30,7 +30,7 @@ class HomeEmptyMemoView: UIView {
     super.init(frame: frame)
     initView()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -38,10 +38,9 @@ class HomeEmptyMemoView: UIView {
   func initView() {
     self.addSubview(arrowLabel)
     self.addSubview(lightStack)
-    
 
     arrowLabel.snp.makeConstraints { (make) in
-      make.bottom.equalTo(self).offset(-19-Constant.UI.safeInsetBottom_iOS10)
+      make.bottom.equalTo(self).offset(-19-Constant.UI.safeInsetBottomiOS10)
       make.trailing.equalTo(self).offset(-82)
     }
     lightStack.snp.makeConstraints { (make) in
@@ -84,6 +83,5 @@ class HomeEmptyMemoView: UIView {
     label.text = Style.Light.text
     return label
   }()
-  
-}
 
+}

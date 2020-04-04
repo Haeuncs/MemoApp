@@ -11,55 +11,55 @@ import UIKit
 import SnapKit
 
 class HomeMemoWithoutImageTableCell: BaseTableCell {
-  
+
   func configure(title: String?, memo: String?, date: Date?, image: UIImage? = nil) {
     if title == nil {
       self.titleLabel.text = " "
-    }else {
+    } else {
       self.titleLabel.text = title
     }
     if memo == nil {
       self.memoLabel.text = " "
-    }else {
+    } else {
       self.memoLabel.text = memo
     }
     if date == nil {
       self.dateLabel.text = " "
-    }else {
+    } else {
       self.dateLabel.text = date!.korDateString()
     }
   }
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    self.backgroundColor = Constant.UI.backgroundColor
+    self.backgroundColor = Color.background
 //    self.selectionStyle = .none
     baseView.addSubview(titleLabel)
     baseView.addSubview(memoLabel)
     baseView.addSubview(dateLabel)
     baseView.addSubview(lineView)
-    
+
     titleLabel.snp.makeConstraints { (make) in
       make.top.equalTo(baseView.snp.top).offset(18)
       make.leading.trailing.equalTo(baseView)
     }
-    
+
     memoLabel.snp.makeConstraints { (make) in
       make.top.equalTo(titleLabel.snp.bottom).offset(16)
       make.leading.equalTo(baseView)
       make.trailing.equalTo(baseView).offset(-16)
     }
-    
+
     dateLabel.snp.makeConstraints { (make) in
       make.top.equalTo(memoLabel.snp.bottom).offset(16)
       make.leading.equalTo(baseView)
       make.bottom.equalTo(lineView.snp.top).offset(-16)
     }
-    
+
     lineView.snp.makeConstraints { (make) in
       make.height.equalTo(1)
       make.bottom.leading.trailing.equalTo(baseView)
     }
-    
+
   }
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -71,11 +71,11 @@ class HomeMemoWithoutImageTableCell: BaseTableCell {
     self.dateLabel.textColor = Color.black
     self.lineView.backgroundColor = Color.grey
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -109,4 +109,3 @@ class HomeMemoWithoutImageTableCell: BaseTableCell {
   }()
 
 }
-

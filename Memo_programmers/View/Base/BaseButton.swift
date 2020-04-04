@@ -16,22 +16,21 @@ class BaseButton: UIButton {
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func setImage(_ image: UIImage?, for state: UIControl.State) {
     //    let renderImage = image?.withRenderingMode(.alwa)
     super.setImage(image, for: state)
   }
-  
+
   override var isHighlighted: Bool {
     didSet {
       if isHighlighted {
         self.alpha = 0.8
-      }
-      else {
+      } else {
         self.alpha = 1
       }
     }

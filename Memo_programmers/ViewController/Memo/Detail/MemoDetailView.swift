@@ -36,7 +36,7 @@ private enum MemoDetailConstants {
 
 class MemoDetailView: BaseView {
   private typealias UI = Constant.UI
-  
+
   /// date 값이 있으면 setting
   func configureDate(createDate: Date?, editDate: Date?) {
     if let date = createDate {
@@ -62,7 +62,7 @@ class MemoDetailView: BaseView {
     photoCollect.backgroundColor = Color.background
   }
   // MARK: - View ✨
-  func initView(){
+  func initView() {
     baseView.addSubview(navView)
     baseView.addSubview(scrollView)
     scrollView.addSubview(titleTextView)
@@ -70,7 +70,7 @@ class MemoDetailView: BaseView {
     scrollView.addSubview(photoLabel)
     scrollView.addSubview(photoCollect)
     scrollView.addSubview(dateStack)
-    
+
     navView.snp.makeConstraints {
       $0.top.leading.trailing.equalTo(baseView)
       $0.height.equalTo(UI.NavigationBar.height)
@@ -123,7 +123,6 @@ class MemoDetailView: BaseView {
   lazy var memoTextView: MemoTextView = {
     let view = MemoTextView()
     view.titleLabel.text = MemoDetailConstants.Text.memo
-//    view.textView.delegate = self
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -131,7 +130,7 @@ class MemoDetailView: BaseView {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.text = MemoDetailConstants.Text.photo
-    label.font = .sb18
+    label.font = .sb14
     return label
   }()
   lazy var photoCollect: UICollectionView = {
@@ -143,7 +142,7 @@ class MemoDetailView: BaseView {
     let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
     view.contentInset = UIEdgeInsets(top: 0, left: MemoDetailConstants.Cell.verticalInset, bottom: 0, right: MemoDetailConstants.Cell.verticalInset)
     view.showsHorizontalScrollIndicator = false
-    view.backgroundColor = Constant.UI.backgroundColor
+    view.backgroundColor = Color.background
     view.translatesAutoresizingMaskIntoConstraints = false
     view.register(MemoPhotoAddPhotoCell.self, forCellWithReuseIdentifier: MemoDetailViewController.photoIdentifier)
     return view

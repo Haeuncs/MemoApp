@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+// swiftlint:disable all
 struct Shadow {
   let color: UIColor
   let alpha: Float
@@ -23,8 +23,7 @@ extension CALayer {
     x: CGFloat = 0,
     y: CGFloat = 2,
     blur: CGFloat = 4,
-    spread: CGFloat = 0)
-  {
+    spread: CGFloat = 0) {
     shadowColor = color.cgColor
     shadowOpacity = alpha
     shadowOffset = CGSize(width: x, height: y)
@@ -38,12 +37,11 @@ extension CALayer {
     }
   }
   func shadow(
-    shadow: Shadow)
-  {
+    shadow: Shadow) {
     shadowColor = shadow.color.cgColor
     shadowOpacity = shadow.alpha
     shadowOffset = CGSize(width: shadow.x, height: shadow.y)
     shadowRadius = shadow.blur / 2.0
   }
-
 }
+// swiftlint:enable all

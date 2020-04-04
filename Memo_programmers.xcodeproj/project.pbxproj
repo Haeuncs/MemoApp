@@ -71,6 +71,8 @@
 		7D9276942402A11A00AFD435 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9276932402A11A00AFD435 /* CoreDataManager.swift */; };
 		7D9276AC2402DE4000AFD435 /* Memo_programmersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9276AB2402DE4000AFD435 /* Memo_programmersTests.swift */; };
 		7D9276C2240307A300AFD435 /* TutorialTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9276C1240307A300AFD435 /* TutorialTableCell.swift */; };
+		7DACDA5A243989CF006AE711 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DACDA59243989CF006AE711 /* SearchView.swift */; };
+		7DACDA602439A3EC006AE711 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +151,8 @@
 		7D9276AB2402DE4000AFD435 /* Memo_programmersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo_programmersTests.swift; sourceTree = "<group>"; };
 		7D9276AD2402DE4000AFD435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D9276C1240307A300AFD435 /* TutorialTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialTableCell.swift; sourceTree = "<group>"; };
+		7DACDA59243989CF006AE711 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +233,7 @@
 		7D6A8CEB23F2DCB0005E0FA4 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7DACDA5E2439A3E2006AE711 /* Search */,
 				7D11BC8624374F1A00E58AC4 /* Popup */,
 				7D927688240258C300AFD435 /* Tutorial */,
 				7D92767F2402430300AFD435 /* BotoomViewController */,
@@ -314,6 +319,7 @@
 				7D6A8D2C23F57F69005E0FA4 /* PullNavigationView.swift */,
 				7D9276722401152900AFD435 /* URLFailureView.swift */,
 				7D92767D2401820900AFD435 /* DismissButton.swift */,
+				7DACDA59243989CF006AE711 /* SearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -405,6 +411,14 @@
 			path = Memo_programmersTests;
 			sourceTree = "<group>";
 		};
+		7DACDA5E2439A3E2006AE711 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -415,6 +429,7 @@
 				7D6A8CCD23F1AA21005E0FA4 /* Sources */,
 				7D6A8CCE23F1AA21005E0FA4 /* Frameworks */,
 				7D6A8CCF23F1AA21005E0FA4 /* Resources */,
+				7D11BC8B2437887500E58AC4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -511,12 +526,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7D11BC8B2437887500E58AC4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7D6A8CCD23F1AA21005E0FA4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7D11BC8824374F2800E58AC4 /* PopupViewController.swift in Sources */,
+				7DACDA5A243989CF006AE711 /* SearchView.swift in Sources */,
 				7D57E18423F8282900397DE3 /* CoreDataModel.swift in Sources */,
 				7D097C7823FC2AE300BAB7BB /* Constant.swift in Sources */,
 				7D9276922402941600AFD435 /* LoadingView.swift in Sources */,
@@ -529,6 +565,7 @@
 				7D6A8D0823F2E2D9005E0FA4 /* Colors.swift in Sources */,
 				7D6A8D2823F43F79005E0FA4 /* UIViewController+.swift in Sources */,
 				7D6A8D3123F58777005E0FA4 /* BasePullDownViewController.swift in Sources */,
+				7DACDA602439A3EC006AE711 /* SearchViewController.swift in Sources */,
 				7D57E18E23F8537600397DE3 /* Date+.swift in Sources */,
 				7D57E19D23F8F50E00397DE3 /* Images+CoreDataProperties.swift in Sources */,
 				7D57E19C23F8F50E00397DE3 /* Memo+CoreDataProperties.swift in Sources */,

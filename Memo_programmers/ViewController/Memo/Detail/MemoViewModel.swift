@@ -32,7 +32,7 @@ protocol MemoViewModelType {
 }
 
 class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelType {
-  
+
   // MARK: - Inputs
   var title: BehaviorRelay<String>
   var content: BehaviorRelay<String>
@@ -50,7 +50,7 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     Constant.BottomPopup.MemoAddPhotoType.loadByCamera,
     Constant.BottomPopup.MemoAddPhotoType.loadByURL
   ]
-  
+
   // MARK: - Init
   let coreData: CoreDataModelType
   init(coreData: CoreDataModelType, memo: MemoData?) {
@@ -60,15 +60,15 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
       self.title = BehaviorRelay(value: memoData.title ?? "")
       self.content = BehaviorRelay(value: memoData.memo ?? "")
       self.imageArray = BehaviorRelay(value: memoData.imageArray ?? [])
-    }else {
+    } else {
       self.memo = BehaviorRelay(value: (MemoData()))
       self.title = BehaviorRelay(value: "")
       self.content = BehaviorRelay(value: "")
       self.imageArray = BehaviorRelay(value: [])
     }
   }
-  
-  func add() -> Bool{
+
+  func add() -> Bool {
     let (bool, _) = coreData.inputs.add(newMemo:
       MemoData(title: self.title.value,
                memo: self.content.value,
@@ -82,7 +82,7 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     }
     return bool
   }
-  
+
   func update() -> Bool {
     let memoData =  MemoData(title: self.title.value,
                              memo: self.content.value,
@@ -98,7 +98,7 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     }
     return bool
   }
-  
+
   func delete() -> Bool {
     let (bool, _) = coreData.inputs.delete(identifier: self.memo.value.identifier!)
     if !bool {
@@ -108,9 +108,8 @@ class MemoViewModel: MemoViewModelInputs, MemoViewModelOutputs, MemoViewModelTyp
     }
     return bool
   }
-  
+
   var inputs: MemoViewModelInputs {return self}
   var outputs: MemoViewModelOutputs {return self}
-  
-  
+
 }

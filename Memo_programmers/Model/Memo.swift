@@ -13,11 +13,11 @@ import UIKit
  */
 
 public struct MemoData {
-  
+
   let title: String?
   let memo: String?
   let date: Date?
-  var modifyDate: Date? = nil
+  var modifyDate: Date?
   let identifier: UUID?
   var imageArray: [Image]?
 }

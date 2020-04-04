@@ -42,7 +42,7 @@ extension UserDefaults {
   func setOrderType(type: OrderType) {
     userPreferences.set(type.rawValue, forKey: orderType)
   }
-  
+
   /**
    
    */
@@ -75,4 +75,3 @@ extension UserDefaults {
     userPreferences.set(bool, forKey: tutorial)
   }
 }
-

@@ -13,7 +13,7 @@ import RxCocoa
 import Kingfisher
 
 class ImageURLInputPopupViewController: BasePullDownViewController {
-  
+
   // MARK: - Properties
   public weak var delegate: MemoDetailLoadURLImageDelegate?
   private var disposeBag = DisposeBag()
@@ -27,25 +27,25 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
       self.setCurrentImageURLType(type: current)
     }
   }
-  
+
   // MARK: - Init
   init() {
     super.init(nibName: nil, bundle: nil)
     self.modalPresentationStyle = .overFullScreen
     self.modalTransitionStyle = .crossDissolve
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     initView()
     bindRx()
     self.currentImageURLType = .load
-    
+
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillShow),
@@ -53,12 +53,12 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
       object: nil
     )
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     self.titleTextView.textField.becomeFirstResponder()
   }
-  
+
   // MARK: - View ✨
   func initView() {
     navView.titleLabel.text = "URL 로 입력하기"
@@ -67,7 +67,7 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
     containerView.addSubview(titleTextView)
     containerView.addSubview(loadImageView)
     containerView.addSubview(failureView)
-    
+
     self.contentView.snp.makeConstraints { (make) in
       if #available(iOS 11.0, *) {
         make.top.equalTo(self.view.safeAreaLayoutGuide)
@@ -96,9 +96,9 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
     bottomConstraints = containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
     bottomConstraints?.isActive = true
   }
-  
+
   // MARK: - Bind 🏷
-  func bindRx(){
+  func bindRx() {
     self.navView.doneButton.rx.tap
       .subscribe(onNext: { (_) in
         switch self.currentImageURLType! {
@@ -109,20 +109,19 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
           self.dismiss(animated: true, completion: nil)
         }
       }).disposed(by: disposeBag)
-    
+
     self.navView.leftButton.rx.tap
       .subscribe(onNext: { [weak self] (_) in
         self?.dismiss(animated: true, completion: nil)
       }).disposed(by: disposeBag)
   }
-  
-  
+
   lazy var containerView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
-  
+
   lazy var titleTextView: MemoTextFieldView = {
     let view = MemoTextFieldView()
     view.titleLabel.text = "URL 로 입력하기"
@@ -131,22 +130,22 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
     view.textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     return view
   }()
-  
+
   lazy var loadImageView: UIImageView = {
     let view = UIImageView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.contentMode = .scaleAspectFit
     return view
   }()
-  
+
   lazy var failureView: URLFailureView = {
     let view = URLFailureView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.isHidden = true
     return view
   }()
-  
-  func setCurrentImageURLType(type: ImageURLType){
+
+  func setCurrentImageURLType(type: ImageURLType) {
     switch type {
     case .load:
       navView.doneButton.setTitle("로드", for: .normal)
@@ -154,33 +153,33 @@ class ImageURLInputPopupViewController: BasePullDownViewController {
       navView.doneButton.setTitle("저장", for: .normal)
     }
   }
-  
-  @objc func loadUrlImage(){
+
+  @objc func loadUrlImage() {
     self.loadImageView.kf.indicatorType = .activity
-    self.loadImageView.kf.setImage(with: URL(string: self.titleTextView.textField.text ?? "")){ result in
+    self.loadImageView.kf.setImage(with: URL(string: self.titleTextView.textField.text ?? "")) { result in
       switch result {
-      case .success(_):
+      case .success:
         self.currentImageURLType = .save
         self.failureView.isHidden = true
-      case .failure(_):
+      case .failure:
         self.currentImageURLType = .load
         self.failureView.isHidden = false
       }
     }
   }
-  
-  @objc func keyboardWillShow(_ notification: Notification){
+
+  @objc func keyboardWillShow(_ notification: Notification) {
     guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
     let keyboardHeight = keyboardFrame.height
-    
+
     self.bottomConstraints?.constant = -keyboardHeight
-    
+
     UIView.animate(withDuration: 0.33, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
-  
-  @objc func textFieldChanged(_ textField: UITextField){
+
+  @objc func textFieldChanged(_ textField: UITextField) {
     self.currentImageURLType = .load
   }
 }

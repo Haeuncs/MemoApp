@@ -24,7 +24,7 @@ class TutorialTableCell: UITableViewCell {
     self.addSubview(thumbImage)
     self.addSubview(titleLabel)
     self.addSubview(detailLabel)
-    
+
     thumbImage.snp.makeConstraints { (make) in
       make.top.leading.equalTo(self)
       make.width.height.equalTo(40)
@@ -40,11 +40,11 @@ class TutorialTableCell: UITableViewCell {
       make.bottom.lessThanOrEqualTo(self)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   lazy var thumbImage: UIImageView = {
     let view = UIImageView()
     view.translatesAutoresizingMaskIntoConstraints = false

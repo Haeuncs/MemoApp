@@ -24,14 +24,14 @@ class PopupViewController: UIViewController {
     self.leftButton.setTitle(data.left, for: .normal)
     self.rightButton.setTitle(data.right, for: .normal)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     self.view.backgroundColor = Color.dim
     initView()
     bindRx()
@@ -42,9 +42,9 @@ class PopupViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
   }
-  
+
   // MARK: - View ✨
-  
+
   func initView() {
     view.addSubview(popupView)
     popupView.addSubview(bodyLabel)
@@ -63,15 +63,15 @@ class PopupViewController: UIViewController {
       make.height.equalTo(40)
     }
   }
-  
-  //MARK: - Bind 🏷
-  
+
+  // MARK: - Bind 🏷
+
   func bindRx() {
     self.leftButton.rx.tap
       .subscribe(onNext: { [weak self] (_) in
         self?.dismiss(animated: true, completion: nil)
       }).disposed(by: disposeBag)
-    
+
     self.rightButton.rx.tap
       .subscribe(onNext: { [weak self] (_) in
         if let handler = self?.data.rightHandler {
@@ -87,7 +87,7 @@ class PopupViewController: UIViewController {
     view.layer.cornerRadius = Constant.UI.radius
     return view
   }()
-  
+
   lazy var bodyLabel: UILabel = {
     let label = UILabel()
     label.font = .m16
@@ -96,7 +96,7 @@ class PopupViewController: UIViewController {
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
-  
+
   lazy var buttonStack: UIStackView = {
     let stack = UIStackView(arrangedSubviews: [leftButton, rightButton])
     stack.alignment = .fill
@@ -105,7 +105,7 @@ class PopupViewController: UIViewController {
     stack.axis = .horizontal
     return stack
   }()
-  
+
   lazy var leftButton: UIButton = {
     let button = UIButton()
     button.titleLabel?.font = .m14
@@ -113,7 +113,7 @@ class PopupViewController: UIViewController {
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
-  
+
   lazy var rightButton: UIButton = {
     let button = UIButton()
     button.titleLabel?.font = .m14
@@ -121,7 +121,5 @@ class PopupViewController: UIViewController {
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
-  
+
 }
-
-

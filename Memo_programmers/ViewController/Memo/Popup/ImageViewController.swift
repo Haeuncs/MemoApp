@@ -6,7 +6,6 @@
 //  Copyright © 2020 LEE HAEUN. All rights reserved.
 //
 
-
 import UIKit
 import SnapKit
 import RxSwift
@@ -16,24 +15,26 @@ import RxCocoa
  이미지 터치 시 나타나는 뷰컨
  */
 class ImageViewController: UIViewController {
-  
+
   // MARK: - Properties
   private var disposeBag = DisposeBag()
   private var images: [UIImage]
   private var selectedIndex: Int
   private var isFirstLoad: Bool = true
-  
+
   // MARK: - Init
   init(images: [UIImage], selectedIndex: Int) {
     self.images = images
     self.selectedIndex = selectedIndex
-    super.init(nibName: nil, bundle: nil)
+
     defer {
       self.setTitle(index: selectedIndex)
       self.navView.dismissButton.popLabel.textColor = .white
     }
+
+    super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -51,13 +52,13 @@ class ImageViewController: UIViewController {
       self.isFirstLoad = false
     }
   }
-  
+
   func setTitle(index: Int) {
     self.navView.dismissButton.popLabel.text = "\(index + 1) / \(images.count)"
   }
-  
+
   // MARK: - View ✨
-  func initView(){
+  func initView() {
     view.backgroundColor = .black
     view.addSubview(navView)
     view.addSubview(imageCollectionView)
@@ -85,20 +86,20 @@ class ImageViewController: UIViewController {
   }
 
   // MARK: - Bind 🏷
-  func bindRx(){
+  func bindRx() {
     self.navView.dismissButton.rx.tap
       .subscribe(onNext: { [weak self] (_) in
         self?.dismiss(animated: true, completion: nil)
       }).disposed(by: disposeBag)
   }
-  
+
   lazy var navView: BaseDismissNavView = {
     let view = BaseDismissNavView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.dismissButton.popImage.tintColor = .white
     return view
   }()
-  
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +107,7 @@ class ImageViewController: UIViewController {
     label.textColor = .white
     return label
   }()
-  
+
   lazy var imageCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -129,7 +130,7 @@ extension ImageViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return self.images.count
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionCell", for: indexPath) as? ImageCollectionCell {
       cell.photoImage.image = self.images[indexPath.row]
@@ -163,5 +164,3 @@ extension ImageViewController: UICollectionViewDelegateFlowLayout {
     debugPrint(indexPath.row)
   }
 }
-
-

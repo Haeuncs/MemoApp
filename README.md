@@ -1,4 +1,16 @@
-## 라인 프로그래머스 메모 앱 과제
+# Memo App
+
+## Features
+
+- [x] CoreData
+- [x] 튜토리얼 화면 제공 👶
+- [x] MVVM 구조로 Massive View Controller 탈출 🚀
+- [x] Memo Order 기능
+- [x] 쉬운 접근성을 위한 long press gesture 메모 편집 기능
+- [x] 일관성있는 디자인 🙉
+- [x] Dark Mode 지원 🌕 🌑
+- [x] Coredata unit test 🔨
+- [x] 검색 기능 제공 🕵️‍♀️
 
 ## Dependencies
 
@@ -10,8 +22,16 @@
 
 ## Screen ✨
 
- <img src="./Images/1.png">
+ <img src="./Images/mock1.png">
 
- <img src="./Images/2.png">
+ <img src="./Images/mock2.png">
 
- <img src="./Images/3.png">
+ <img src="./Images/mock3.png">
+
+## Any ideas..
+
+If you have ideas for improvements, share with me or Pull Request.
+
+## Author
+
+Haeun Lee, haeun.developer@gmail.com

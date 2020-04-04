@@ -17,33 +17,33 @@ private enum Style {
   enum Title {
     static let font: UIFont = .sb14
     static let color: UIColor = Color.black
-    static let margin_left: CGFloat = 6
+    static let marginLeft: CGFloat = 6
   }
 }
 
 class DismissButton: BaseButton {
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
+
     self.addSubview(popImage)
     self.addSubview(popLabel)
-    
+
     popImage.snp.makeConstraints { (make) in
       make.width.equalTo(Style.Image.height)
       make.top.bottom.leading.equalTo(self)
     }
     popLabel.snp.makeConstraints { (make) in
-      make.leading.equalTo(popImage.snp.trailing).offset(Style.Title.margin_left)
+      make.leading.equalTo(popImage.snp.trailing).offset(Style.Title.marginLeft)
       make.trailing.equalTo(self)
       make.centerY.equalTo(self)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   lazy var popImage: UIImageView = {
     let view = UIImageView()
     view.image = Style.Image.image
@@ -58,5 +58,5 @@ class DismissButton: BaseButton {
     label.textColor = Style.Title.color
     return label
   }()
-  
+
 }

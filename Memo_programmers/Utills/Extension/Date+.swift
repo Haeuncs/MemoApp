@@ -30,20 +30,19 @@ extension Date {
   func fetchWeatherDateString() -> String {
     return Date.dateFormatter20200201.string(from: self)
   }
-  
+
   func fetchWeatherDateWithHourString() -> (String, String) {
   return (Date.dateFormatter20200201.string(from: self), Date.dateFormatterHour.string(from: self))
   }
-  
+
   @nonobjc static var localFormatter: DateFormatter = {
     let dateStringFormatter = DateFormatter()
     dateStringFormatter.dateStyle = .medium
     dateStringFormatter.timeStyle = .medium
     return dateStringFormatter
   }()
-  
-  func localDateString() -> String
-  {
+
+  func localDateString() -> String {
     return Date.localFormatter.string(from: self)
   }
 }

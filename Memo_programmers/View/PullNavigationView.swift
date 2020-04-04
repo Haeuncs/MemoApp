@@ -12,7 +12,7 @@ import SnapKit
 class PullNavigationView: BaseView {
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
+
     baseView.addSubview(leftButton)
     baseView.addSubview(titleLabel)
     baseView.addSubview(doneButton)
@@ -37,7 +37,7 @@ class PullNavigationView: BaseView {
     }
     setAppearance()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -80,4 +80,3 @@ class PullNavigationView: BaseView {
   }()
 
 }
-

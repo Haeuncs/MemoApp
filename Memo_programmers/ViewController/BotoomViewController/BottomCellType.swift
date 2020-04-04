@@ -8,17 +8,17 @@
 
 import UIKit
 
-public enum BottomCellStyle {
+enum BottomCellStyle {
   case selected
   case `default`
 }
 
-public struct BottomCellData {
-  
-  fileprivate(set) var cellData: MemoEdit
-  public fileprivate(set) var style = BottomCellStyle.default
-  public fileprivate(set) var handler: (() -> Void)
-  
+struct BottomCellData {
+
+  private(set) var cellData: MemoEdit
+  private(set) var style = BottomCellStyle.default
+  private(set) var handler: (() -> Void)
+
   init(cellData: MemoEdit,
        style: BottomCellStyle = BottomCellStyle.default,
        handler: @escaping (() -> Void)) {

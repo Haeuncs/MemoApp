@@ -15,7 +15,7 @@ extension UIViewController {
     self.view.addGestureRecognizer(self.endEditingRecognizer())
     self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
   }
-  
+
   /// Dismisses the keyboard from self.view
   private func endEditingRecognizer() -> UIGestureRecognizer {
     let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))

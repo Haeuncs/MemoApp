@@ -12,7 +12,7 @@ extension UIFont {
   public static var h28: UIFont {
     return UIFont.systemFont(ofSize: 28, weight: .heavy)
   }
-  
+
   public static var sb28: UIFont {
     return UIFont.systemFont(ofSize: 28, weight: .semibold)
   }
