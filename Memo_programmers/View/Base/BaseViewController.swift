@@ -30,8 +30,18 @@ class BaseViewController: UIViewController {
         // Fallback on earlier versions
         make.top.equalTo(view.snp.top)
       }
-      make.leading.equalTo(view.snp.leading).offset(Constant.UI.Size.margin)
-      make.trailing.equalTo(view.snp.trailing).offset(-Constant.UI.Size.margin)
+      if #available(iOS 11.0, *) {
+        make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(Constant.UI.Size.margin)
+      } else {
+        // Fallback on earlier versions
+        make.leading.equalTo(view.snp.leading).offset(Constant.UI.Size.margin)
+      }
+      if #available(iOS 11.0, *) {
+        make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-Constant.UI.Size.margin)
+      } else {
+        // Fallback on earlier versions
+        make.trailing.equalTo(view.snp.trailing).offset(Constant.UI.Size.margin)
+      }
       if #available(iOS 11.0, *) {
         make.bottom.equalTo(view.safeAreaLayoutGuide)
       } else {

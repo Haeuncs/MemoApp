@@ -67,11 +67,12 @@ class ImageViewController: UIViewController {
     navView.snp.makeConstraints { (make) in
       if #available(iOS 11.0, *) {
         make.top.equalTo(view.safeAreaLayoutGuide)
+        make.leading.equalTo(view.safeAreaLayoutGuide).offset(Constant.UI.Size.margin)
       } else {
         // Fallback on earlier versions
         make.top.equalTo(view)
+        make.leading.equalTo(view).offset(Constant.UI.Size.margin)
       }
-      make.leading.equalTo(view).offset(Constant.UI.Size.margin)
       make.trailing.equalTo(view)
       make.height.equalTo(Constant.UI.NavigationBar.height)
     }

@@ -19,12 +19,14 @@ class BaseTableCell: UITableViewCell {
     baseView.snp.makeConstraints { (make) in
       if #available(iOS 11.0, *) {
         make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+        make.leading.equalTo(self.safeAreaLayoutGuide).offset(Constant.UI.Size.margin)
+        make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-Constant.UI.Size.margin)
       } else {
         // Fallback on earlier versions
         make.top.equalTo(self.snp.top)
+        make.leading.equalTo(self).offset(Constant.UI.Size.margin)
+        make.trailing.equalTo(self).offset(-Constant.UI.Size.margin)
       }
-      make.leading.equalTo(self.snp.leading).offset(Constant.UI.Size.margin)
-      make.trailing.equalTo(self.snp.trailing).offset(-Constant.UI.Size.margin)
       make.bottom.equalTo(self)
     }
   }

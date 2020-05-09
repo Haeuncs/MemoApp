@@ -102,7 +102,13 @@ class HomeViewController: BaseViewController {
       make.height.equalTo(Constant.UI.NavigationBar.height)
     }
     tableView.snp.makeConstraints { (make) in
-      make.leading.trailing.bottom.equalTo(view)
+      if #available(iOS 11.0, *) {
+        make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+      } else {
+        // Fallback on earlier versions
+        make.leading.trailing.equalTo(view)
+      }
+      make.bottom.equalTo(view)
       make.top.equalTo(navView.snp.bottom)
     }
     addMemoButton.snp.makeConstraints { (make) in
