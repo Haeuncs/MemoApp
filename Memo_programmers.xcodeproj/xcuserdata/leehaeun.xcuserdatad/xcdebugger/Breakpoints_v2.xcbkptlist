@@ -94,10 +94,10 @@
             filePath = "Memo_programmers/ViewController/Memo/Popup/ImageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "scrollViewDidEndDecelerating(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,8 +126,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "396"
             endingLineNumber = "396"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "deleteImage(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -190,8 +190,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "273"
             endingLineNumber = "273"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "checkPhotoAuthorize()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,8 +206,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "289"
             endingLineNumber = "289"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "checkPhotoAuthorize()"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "BCC8666D-5F41-40E1-83D8-6295D0223E29 - cc1072a2b0abe3a5"
@@ -246,7 +246,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5047E77F-B114-45C6-B06C-4D5689492C82"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Memo_programmers/View/Cell/HomeMemoTableCell.swift"
@@ -262,7 +262,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "676744D2-FEB5-4AFB-9637-FAD2C40ADA06"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Memo_programmers/View/Cell/HomeMemoTableCell.swift"
@@ -278,7 +278,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "14BE8E95-EDE4-4D8B-9B81-1870B8E723F6"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Memo_programmers/View/Cell/HomeMemoTableCell.swift"
@@ -294,7 +294,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3EB805A3-DFCA-4753-90D5-B02A9C626F6B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Memo_programmers/View/Cell/HomeMemoTableCell.swift"
@@ -318,8 +318,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "init(type:coreData:memoData:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -367,6 +367,70 @@
             startingLineNumber = "31"
             endingLineNumber = "31"
             landmarkName = "init(searchViewFrame:memos:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0FCD87B4-546D-40ED-BE35-90DAC5CEFB29"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Memo_programmers/ViewController/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "preferredStatusBarStyle"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C9C52A7-88FB-47DC-B8D9-D47465DBFC75"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Memo_programmers/ViewController/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "preferredStatusBarStyle"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91ECBD98-4E99-4A78-85C7-25E231B73194"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Memo_programmers/ViewController/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "preferredStatusBarStyle"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2D85493B-3F0E-4A50-8654-40F41A7C84FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Memo_programmers/View/Cell/HomeMemoTableCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "configure(title:memo:date:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -48,7 +48,9 @@ class ImageViewController: UIViewController {
 
   override func viewDidLayoutSubviews() {
     if self.isFirstLoad {
-    imageCollectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0), at: .centeredHorizontally, animated: false)
+    imageCollectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0),
+                                     at: .centeredHorizontally,
+                                     animated: false)
       self.isFirstLoad = false
     }
   }
@@ -120,6 +122,7 @@ class ImageViewController: UIViewController {
     collect.register(ImageCollectionCell.self,
                      forCellWithReuseIdentifier: "ImageCollectionCell")
     collect.translatesAutoresizingMaskIntoConstraints = false
+    collect.showsHorizontalScrollIndicator = false
     return collect
   }()
 }

@@ -116,7 +116,8 @@ class MemoDetailView: BaseView {
   lazy var titleTextView: MemoTextFieldView = {
     let view = MemoTextFieldView()
     view.titleLabel.text = MemoDetailConstants.Text.title
-    view.textField.placeholder = MemoDetailConstants.Text.titlePlaceHolder
+    view.textField.attributedPlaceholder = NSAttributedString(string: MemoDetailConstants.Text.titlePlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: Color.grey])
+
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()

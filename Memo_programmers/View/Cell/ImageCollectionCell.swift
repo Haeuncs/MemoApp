@@ -19,14 +19,19 @@ class ImageCollectionCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func prepareForReuse() {
+    self.photoImage.initZoom()
+  }
   func initView() {
     self.addSubview(photoImage)
     photoImage.snp.makeConstraints { (make) in
       make.top.leading.trailing.bottom.equalTo(self)
     }
   }
+  
   lazy var photoImage: UIImageView = {
     let view = UIImageView()
+    view.enableZoom()
     view.backgroundColor = .black
     view.translatesAutoresizingMaskIntoConstraints = false
     view.contentMode = .scaleAspectFit

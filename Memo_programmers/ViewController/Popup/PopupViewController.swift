@@ -91,6 +91,7 @@ class PopupViewController: UIViewController {
   lazy var bodyLabel: UILabel = {
     let label = UILabel()
     label.font = .m16
+    label.textColor = Color.black
     label.textAlignment = .center
     label.numberOfLines = 0
     label.translatesAutoresizingMaskIntoConstraints = false

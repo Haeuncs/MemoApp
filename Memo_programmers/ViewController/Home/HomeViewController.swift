@@ -80,6 +80,14 @@ class HomeViewController: BaseViewController {
     contentView.backgroundColor = Color.background
     self.tableView.backgroundColor = Color.background
     self.addMemoButton.backgroundColor = HomeConstants.AddButton.backgroundColor
+    
+    switch userPreferences.getColorTheme() {
+    case .dark:
+      UIApplication.shared.setStatusBarTextColor(.dark)
+    case .light:
+      UIApplication.shared.setStatusBarTextColor(.light)
+    }
+    
   }
 
   func initView() {
