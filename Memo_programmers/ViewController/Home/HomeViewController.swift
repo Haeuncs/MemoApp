@@ -99,7 +99,7 @@ class HomeViewController: BaseViewController {
 
     navView.snp.makeConstraints { (make) in
       make.top.leading.trailing.equalTo(contentView)
-      make.height.equalTo(Constant.UI.NavigationBar.height)
+      make.height.equalTo(50)
     }
     tableView.snp.makeConstraints { (make) in
       if #available(iOS 11.0, *) {

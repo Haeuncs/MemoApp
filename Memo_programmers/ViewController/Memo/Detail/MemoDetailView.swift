@@ -65,11 +65,12 @@ class MemoDetailView: BaseView {
   func initView() {
     baseView.addSubview(navView)
     baseView.addSubview(scrollView)
-    scrollView.addSubview(titleTextView)
-    scrollView.addSubview(memoTextView)
-    scrollView.addSubview(photoLabel)
-    scrollView.addSubview(photoCollect)
-    scrollView.addSubview(dateStack)
+    scrollView.addSubview(scrollViewContentView)
+    scrollViewContentView.addSubview(titleTextView)
+    scrollViewContentView.addSubview(memoTextView)
+    scrollViewContentView.addSubview(photoLabel)
+    scrollViewContentView.addSubview(photoCollect)
+    scrollViewContentView.addSubview(dateStack)
 
     navView.snp.makeConstraints {
       $0.top.leading.trailing.equalTo(baseView)
@@ -79,8 +80,12 @@ class MemoDetailView: BaseView {
       $0.top.equalTo(navView.snp.bottom)
       $0.leading.trailing.bottom.equalTo(self)
     }
+    scrollViewContentView.snp.makeConstraints { (make) in
+      make.top.bottom.equalToSuperview()
+      make.leading.trailing.equalTo(self)
+    }
     titleTextView.snp.makeConstraints {
-      $0.top.equalTo(scrollView.snp.top).offset(MemoDetailConstants.UI.horizontalMargin)
+      $0.top.equalTo(scrollViewContentView.snp.top).offset(MemoDetailConstants.UI.horizontalMargin)
       $0.leading.trailing.equalTo(baseView)
     }
     memoTextView.snp.makeConstraints {
@@ -99,7 +104,7 @@ class MemoDetailView: BaseView {
     dateStack.snp.makeConstraints { (make) in
       make.top.equalTo(photoCollect.snp.bottom).offset(MemoDetailConstants.UI.horizontalMargin)
       make.leading.trailing.equalTo(self)
-      make.bottom.equalTo(scrollView.snp.bottom).offset(-Constant.UI.Size.margin)
+      make.bottom.equalTo(scrollViewContentView.snp.bottom).offset(-Constant.UI.Size.margin)
     }
   }
 
@@ -112,6 +117,11 @@ class MemoDetailView: BaseView {
     let scroll = UIScrollView()
     scroll.translatesAutoresizingMaskIntoConstraints = false
     return scroll
+  }()
+  lazy var scrollViewContentView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
   }()
   lazy var titleTextView: MemoTextFieldView = {
     let view = MemoTextFieldView()
