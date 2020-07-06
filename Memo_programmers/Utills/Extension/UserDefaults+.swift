@@ -29,7 +29,7 @@ extension UserDefaults {
   }
   func getOrderTypeKor() -> String? {
     guard let type = userPreferences.string(forKey: orderType) else {
-      return nil
+      return Constant.BottomPopup.MemoOrderType.createDate.title
     }
     if type == "title" {
       return Constant.BottomPopup.MemoOrderType.title.title
