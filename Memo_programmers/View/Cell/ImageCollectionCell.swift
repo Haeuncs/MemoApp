@@ -20,8 +20,8 @@ class ImageCollectionCell: UICollectionViewCell {
   }
 
   override func prepareForReuse() {
-    self.photoImage.initZoom()
   }
+    
   func initView() {
     self.addSubview(photoImage)
     photoImage.snp.makeConstraints { (make) in
@@ -31,7 +31,6 @@ class ImageCollectionCell: UICollectionViewCell {
   
   lazy var photoImage: UIImageView = {
     let view = UIImageView()
-    view.enableZoom()
     view.backgroundColor = .black
     view.translatesAutoresizingMaskIntoConstraints = false
     view.contentMode = .scaleAspectFit
