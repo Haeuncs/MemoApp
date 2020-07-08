@@ -73,7 +73,6 @@
 		7D9276C2240307A300AFD435 /* TutorialTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9276C1240307A300AFD435 /* TutorialTableCell.swift */; };
 		7DACDA5A243989CF006AE711 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DACDA59243989CF006AE711 /* SearchView.swift */; };
 		7DACDA602439A3EC006AE711 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */; };
-		7DADC7F92466674300323BA1 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADC7F82466674300323BA1 /* UIImageView+.swift */; };
 		7DADC7FB246671E700323BA1 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADC7FA246671E700323BA1 /* UIApplication+.swift */; };
 /* End PBXBuildFile section */
 
@@ -155,7 +154,6 @@
 		7D9276C1240307A300AFD435 /* TutorialTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialTableCell.swift; sourceTree = "<group>"; };
 		7DACDA59243989CF006AE711 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		7DADC7F82466674300323BA1 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		7DADC7FA246671E700323BA1 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -338,7 +336,6 @@
 				7D92766A2400E05000AFD435 /* UICollectionView+.swift */,
 				7D92766C2400E12A00AFD435 /* UITableView+.swift */,
 				7D92768D240276EC00AFD435 /* UIImage+.swift */,
-				7DADC7F82466674300323BA1 /* UIImageView+.swift */,
 				7DADC7FA246671E700323BA1 /* UIApplication+.swift */,
 			);
 			path = Extension;
@@ -563,7 +560,6 @@
 				7D097C7823FC2AE300BAB7BB /* Constant.swift in Sources */,
 				7D9276922402941600AFD435 /* LoadingView.swift in Sources */,
 				7D6A8D2A23F452FA005E0FA4 /* MemoPopupCell.swift in Sources */,
-				7DADC7F92466674300323BA1 /* UIImageView+.swift in Sources */,
 				7D92766D2400E12A00AFD435 /* UITableView+.swift in Sources */,
 				7D6A8CEF23F2DE89005E0FA4 /* HomeViewController.swift in Sources */,
 				7D57E18223F824A900397DE3 /* HomeViewModel.swift in Sources */,
