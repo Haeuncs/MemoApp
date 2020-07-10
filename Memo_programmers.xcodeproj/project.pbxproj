@@ -74,6 +74,7 @@
 		7DACDA5A243989CF006AE711 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DACDA59243989CF006AE711 /* SearchView.swift */; };
 		7DACDA602439A3EC006AE711 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */; };
 		7DADC7FB246671E700323BA1 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADC7FA246671E700323BA1 /* UIApplication+.swift */; };
+		CEBC90D524B8A3690094341C /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC90D424B8A3690094341C /* Notification.Name+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +156,7 @@
 		7DACDA59243989CF006AE711 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7DADC7FA246671E700323BA1 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		CEBC90D424B8A3690094341C /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +353,7 @@
 				7D6A8CDD23F1AA21005E0FA4 /* Memo_programmers.xcdatamodeld */,
 				7D57E17223F81DE400397DE3 /* Memo+CoreDataClass.swift */,
 				7D57E19A23F8F50E00397DE3 /* Memo+CoreDataProperties.swift */,
+				CEBC90D424B8A3690094341C /* Notification.Name+.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				7D92769024027CE900AFD435 /* ToastMessage.swift in Sources */,
 				7D6A8D0823F2E2D9005E0FA4 /* Colors.swift in Sources */,
 				7D6A8D2823F43F79005E0FA4 /* UIViewController+.swift in Sources */,
+				CEBC90D524B8A3690094341C /* Notification.Name+.swift in Sources */,
 				7D6A8D3123F58777005E0FA4 /* BasePullDownViewController.swift in Sources */,
 				7DACDA602439A3EC006AE711 /* SearchViewController.swift in Sources */,
 				7D57E18E23F8537600397DE3 /* Date+.swift in Sources */,

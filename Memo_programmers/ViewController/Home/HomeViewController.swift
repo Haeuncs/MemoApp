@@ -51,6 +51,13 @@ class HomeViewController: BaseViewController {
     initView()
     bindRx()
     setAppearance()
+
+    NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(didNotifyChangedMemo(_:)),
+        name: .memoDataChanged,
+        object: nil
+    )
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -277,7 +284,6 @@ extension HomeViewController {
     }))
     bottomPopupVC.addAction(BottomCellData(cellData: memoEditType.delete, handler: {
       self.viewModel.inputs.deleteMemo(identifier: memo.identifier)
-      self.viewModel.inputs.getMemo()
     }))
     present(bottomPopupVC, animated: true, completion: nil)
   }
@@ -291,19 +297,16 @@ extension HomeViewController {
                                 style: currentOrderType == orderTypes.title.title ? .selected : .default ,
                                 handler: {
                                   userPreferences.setOrderType(type: .title)
-                                  self.viewModel.inputs.getMemo()
     }))
     bottomPopupVC.addAction(BottomCellData(cellData: orderTypes.createDate,
                                 style: currentOrderType == orderTypes.createDate.title ? .selected : .default,
                                 handler: {
                                   userPreferences.setOrderType(type: .createDate)
-                                  self.viewModel.inputs.getMemo()
     }))
     bottomPopupVC.addAction(BottomCellData(cellData: orderTypes.modifyDate,
                                 style: currentOrderType == orderTypes.modifyDate.title ? .selected : .default,
                                 handler: {
                                   userPreferences.setOrderType(type: .modifyDate)
-                                  self.viewModel.inputs.getMemo()
     }))
 
     self.present(bottomPopupVC, animated: true, completion: nil)
@@ -320,5 +323,12 @@ extension HomeViewController {
                         options: .transitionCrossDissolve,
                         animations: nil,
                         completion: nil)
+  }
+}
+
+extension HomeViewController {
+  // MARK: - Notification
+  @objc func didNotifyChangedMemo(_ notification: Notification) {
+    viewModel.inputs.getMemo()
   }
 }
