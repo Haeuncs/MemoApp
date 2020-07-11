@@ -17,12 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    let theme = userPreferences.getColorTheme()
-    if theme == .light {
-      Theme.lightMode()
-    } else {
-      Theme.darkMode()
-    }
 //    let coreData = CoreDataModel()
     let viewController = HomeViewController()
 //    viewController.insert(withModel: coreData)

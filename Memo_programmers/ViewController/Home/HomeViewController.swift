@@ -244,23 +244,7 @@ extension HomeViewController {
   }
 
   func openSetting() {
-    let currentTheme = userPreferences.getColorTheme()
     let bottomPopupVC = BottomViewController(title: "설정")
-    bottomPopupVC.addAction(BottomCellData(cellData:
-      MemoEdit(image: currentTheme == .light ? UIImage(named: "darkMode")! : UIImage(named: "lightMode")!,
-               title: currentTheme == .light ? "다크모드 켜기" : "라이트모드 켜기"),
-                                handler: {
-                                  let vc = HomeViewController()
-                                  if currentTheme == .light {
-                                    userPreferences.setColorTheme(theme: .dark)
-                                    Theme.darkMode()
-                                    self.setRootViewController(vc)
-                                  } else {
-                                    userPreferences.setColorTheme(theme: .light)
-                                    Theme.lightMode()
-                                    self.setRootViewController(vc)
-                                  }
-    }))
     bottomPopupVC.addAction(BottomCellData(cellData: MemoEdit(image: UIImage(named: "orderTitle")!, title: "튜토리얼 다시보기"), handler: {
       let tutorialVC = TutorialViewController()
       self.present(tutorialVC, animated: true, completion: {})

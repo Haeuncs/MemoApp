@@ -179,6 +179,8 @@ class CoreDataManager: NSObject {
   // flush
   func flushData() {
 
+    let container = NSPersistentContainer(name: "Memo_programmers")
+
     let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "Memo")
     if let objs = try? CoreDataManager.sharedManager.persistentContainer.viewContext.fetch(fetchRequest) {
       for case let obj as NSManagedObject in objs {
