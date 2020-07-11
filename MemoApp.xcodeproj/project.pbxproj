@@ -29,7 +29,7 @@
 		7D6A8CF123F2DF3C005E0FA4 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8CF023F2DF3C005E0FA4 /* MemoDetailViewController.swift */; };
 		7D6A8CF823F2DFAD005E0FA4 /* ImageURLInputPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8CF723F2DFAD005E0FA4 /* ImageURLInputPopupViewController.swift */; };
 		7D6A8D0423F2E271005E0FA4 /* HomeNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8D0323F2E271005E0FA4 /* HomeNavView.swift */; };
-		7D6A8D0823F2E2D9005E0FA4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8D0723F2E2D9005E0FA4 /* Colors.swift */; };
+		7D6A8D0823F2E2D9005E0FA4 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8D0723F2E2D9005E0FA4 /* Color.swift */; };
 		7D6A8D0F23F2E4EA005E0FA4 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8D0E23F2E4EA005E0FA4 /* Fonts.swift */; };
 		7D6A8D1123F2EA4A005E0FA4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8D1023F2EA4A005E0FA4 /* BaseViewController.swift */; };
 		7D6A8D1523F2EB19005E0FA4 /* HomeMemoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A8D1423F2EB19005E0FA4 /* HomeMemoTableCell.swift */; };
@@ -71,7 +71,16 @@
 		7DACDA602439A3EC006AE711 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DACDA5F2439A3EC006AE711 /* SearchViewController.swift */; };
 		7DADC7FB246671E700323BA1 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DADC7FA246671E700323BA1 /* UIApplication+.swift */; };
 		B61F3BB74FE99DD95FE737A4 /* Pods_MemoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F769F673D219EDADD96B0BBF /* Pods_MemoAppTests.framework */; };
+		CE98FDFC24BA21690005829B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D6A8CE023F1AA24005E0FA4 /* Assets.xcassets */; };
+		CE98FDFD24BA21770005829B /* Color.swift in Resources */ = {isa = PBXBuildFile; fileRef = 7D6A8D0723F2E2D9005E0FA4 /* Color.swift */; };
 		CEBC90D524B8A3690094341C /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC90D424B8A3690094341C /* Notification.Name+.swift */; };
+		CEEBFA3924BA14FC00366983 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEBFA1E24BA149500366983 /* WidgetKit.framework */; };
+		CEEBFA3A24BA14FC00366983 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEBFA2024BA149500366983 /* SwiftUI.framework */; };
+		CEEBFA4024BA14FD00366983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEBFA3F24BA14FD00366983 /* Assets.xcassets */; };
+		CEEBFA4624BA14FD00366983 /* MemoAppWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CEEBFA3824BA14FC00366983 /* MemoAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CEEBFA4B24BA152F00366983 /* MemoAppWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBFA4A24BA152F00366983 /* MemoAppWidget.swift */; };
+		CEEBFA4D24BA153700366983 /* MemoAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CEEBFA4C24BA153700366983 /* MemoAppWidget.intentdefinition */; };
+		CEEBFA4E24BA153700366983 /* MemoAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CEEBFA4C24BA153700366983 /* MemoAppWidget.intentdefinition */; };
 		E1115187EA19C4C583F02B99 /* Pods_MemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B6DD9BA32F0B578027BF80 /* Pods_MemoApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +92,28 @@
 			remoteGlobalIDString = 7D6A8CD023F1AA21005E0FA4;
 			remoteInfo = Memo_programmers;
 		};
+		CEEBFA4424BA14FD00366983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D6A8CC923F1AA21005E0FA4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEEBFA3724BA14FC00366983;
+			remoteInfo = MemoAppWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CEEBFA3124BA149500366983 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CEEBFA4624BA14FD00366983 /* MemoAppWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		26B8A2B959A87FAE1DF4B2A5 /* Pods-MemoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MemoAppTests/Pods-MemoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,7 +149,7 @@
 		7D6A8CF023F2DF3C005E0FA4 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 		7D6A8CF723F2DFAD005E0FA4 /* ImageURLInputPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLInputPopupViewController.swift; sourceTree = "<group>"; };
 		7D6A8D0323F2E271005E0FA4 /* HomeNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavView.swift; sourceTree = "<group>"; };
-		7D6A8D0723F2E2D9005E0FA4 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		7D6A8D0723F2E2D9005E0FA4 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7D6A8D0E23F2E4EA005E0FA4 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		7D6A8D1023F2EA4A005E0FA4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7D6A8D1423F2EB19005E0FA4 /* HomeMemoTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMemoTableCell.swift; sourceTree = "<group>"; };
@@ -164,6 +194,13 @@
 		7DADC7FA246671E700323BA1 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		B9B6DD9BA32F0B578027BF80 /* Pods_MemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEBC90D424B8A3690094341C /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		CEEBFA1E24BA149500366983 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		CEEBFA2024BA149500366983 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		CEEBFA3824BA14FC00366983 /* MemoAppWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MemoAppWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEBFA3F24BA14FD00366983 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEEBFA4124BA14FD00366983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEEBFA4A24BA152F00366983 /* MemoAppWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoAppWidget.swift; sourceTree = "<group>"; };
+		CEEBFA4C24BA153700366983 /* MemoAppWidget.intentdefinition */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.intentdefinition; path = MemoAppWidget.intentdefinition; sourceTree = "<group>"; };
 		F769F673D219EDADD96B0BBF /* Pods_MemoAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -185,6 +222,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEEBFA3524BA14FC00366983 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEEBFA3A24BA14FC00366983 /* SwiftUI.framework in Frameworks */,
+				CEEBFA3924BA14FC00366983 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -203,6 +249,8 @@
 				7D57E18723F83C3900397DE3 /* CloudKit.framework */,
 				B9B6DD9BA32F0B578027BF80 /* Pods_MemoApp.framework */,
 				F769F673D219EDADD96B0BBF /* Pods_MemoAppTests.framework */,
+				CEEBFA1E24BA149500366983 /* WidgetKit.framework */,
+				CEEBFA2024BA149500366983 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -212,6 +260,7 @@
 			children = (
 				7D6A8CD323F1AA21005E0FA4 /* MemoApp */,
 				7D9276AA2402DE4000AFD435 /* MemoAppTests */,
+				CEEBFA3B24BA14FC00366983 /* MemoAppWidget */,
 				7D6A8CD223F1AA21005E0FA4 /* Products */,
 				7D57E18623F83C3900397DE3 /* Frameworks */,
 				87E9AE856702232EDD45C146 /* Pods */,
@@ -223,6 +272,7 @@
 			children = (
 				7D6A8CD123F1AA21005E0FA4 /* MemoApp.app */,
 				7D9276A92402DE4000AFD435 /* MemoAppTests.xctest */,
+				CEEBFA3824BA14FC00366983 /* MemoAppWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -300,7 +350,7 @@
 		7D6A8D0623F2E2CD005E0FA4 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
-				7D6A8D0723F2E2D9005E0FA4 /* Colors.swift */,
+				7D6A8D0723F2E2D9005E0FA4 /* Color.swift */,
 				7D6A8D0E23F2E4EA005E0FA4 /* Fonts.swift */,
 			);
 			path = Styles;
@@ -449,6 +499,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CEEBFA3B24BA14FC00366983 /* MemoAppWidget */ = {
+			isa = PBXGroup;
+			children = (
+				CEEBFA4C24BA153700366983 /* MemoAppWidget.intentdefinition */,
+				CEEBFA4A24BA152F00366983 /* MemoAppWidget.swift */,
+				CEEBFA3F24BA14FD00366983 /* Assets.xcassets */,
+				CEEBFA4124BA14FD00366983 /* Info.plist */,
+			);
+			path = MemoAppWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -462,10 +523,12 @@
 				7D6A8CCF23F1AA21005E0FA4 /* Resources */,
 				7D11BC8B2437887500E58AC4 /* ShellScript */,
 				E454E87FF87B58EB55344ADA /* [CP] Embed Pods Frameworks */,
+				CEEBFA3124BA149500366983 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CEEBFA4524BA14FD00366983 /* PBXTargetDependency */,
 			);
 			name = MemoApp;
 			productName = Memo_programmers;
@@ -491,13 +554,30 @@
 			productReference = 7D9276A92402DE4000AFD435 /* MemoAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CEEBFA3724BA14FC00366983 /* MemoAppWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEEBFA4724BA14FD00366983 /* Build configuration list for PBXNativeTarget "MemoAppWidgetExtension" */;
+			buildPhases = (
+				CEEBFA3424BA14FC00366983 /* Sources */,
+				CEEBFA3524BA14FC00366983 /* Frameworks */,
+				CEEBFA3624BA14FC00366983 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MemoAppWidgetExtension;
+			productName = MemoAppWidgetExtension;
+			productReference = CEEBFA3824BA14FC00366983 /* MemoAppWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		7D6A8CC923F1AA21005E0FA4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "LEE HAEUN";
 				TargetAttributes = {
@@ -507,6 +587,9 @@
 					7D9276A82402DE4000AFD435 = {
 						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = 7D6A8CD023F1AA21005E0FA4;
+					};
+					CEEBFA3724BA14FC00366983 = {
+						CreatedOnToolsVersion = 12.0;
 					};
 				};
 			};
@@ -525,6 +608,7 @@
 			targets = (
 				7D6A8CD023F1AA21005E0FA4 /* MemoApp */,
 				7D9276A82402DE4000AFD435 /* MemoAppTests */,
+				CEEBFA3724BA14FC00366983 /* MemoAppWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -543,6 +627,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEEBFA3624BA14FC00366983 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE98FDFD24BA21770005829B /* Color.swift in Resources */,
+				CE98FDFC24BA21690005829B /* Assets.xcassets in Resources */,
+				CEEBFA4024BA14FD00366983 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,7 +739,7 @@
 				7D57E18223F824A900397DE3 /* HomeViewModel.swift in Sources */,
 				7D11BC8A2437756400E58AC4 /* PopupData.swift in Sources */,
 				7D92769024027CE900AFD435 /* ToastMessage.swift in Sources */,
-				7D6A8D0823F2E2D9005E0FA4 /* Colors.swift in Sources */,
+				7D6A8D0823F2E2D9005E0FA4 /* Color.swift in Sources */,
 				7D6A8D2823F43F79005E0FA4 /* UIViewController+.swift in Sources */,
 				CEBC90D524B8A3690094341C /* Notification.Name+.swift in Sources */,
 				7D6A8D3123F58777005E0FA4 /* BasePullDownViewController.swift in Sources */,
@@ -669,6 +763,7 @@
 				7D92765A23FEBA6800AFD435 /* HomeMemoWithoutImageTableCell.swift in Sources */,
 				7D927665240036F500AFD435 /* Image.swift in Sources */,
 				7D6A8D2023F2FD48005E0FA4 /* MemoTextView.swift in Sources */,
+				CEEBFA4D24BA153700366983 /* MemoAppWidget.intentdefinition in Sources */,
 				7D6A8D2323F302B0005E0FA4 /* MemoPhotoAddPhotoCell.swift in Sources */,
 				7D92767C240181A200AFD435 /* BaseDismissNavView.swift in Sources */,
 				7D6A8D1523F2EB19005E0FA4 /* HomeMemoTableCell.swift in Sources */,
@@ -705,6 +800,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEEBFA3424BA14FC00366983 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEEBFA4E24BA153700366983 /* MemoAppWidget.intentdefinition in Sources */,
+				CEEBFA4B24BA152F00366983 /* MemoAppWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -712,6 +816,11 @@
 			isa = PBXTargetDependency;
 			target = 7D6A8CD023F1AA21005E0FA4 /* MemoApp */;
 			targetProxy = 7D9276AE2402DE4000AFD435 /* PBXContainerItemProxy */;
+		};
+		CEEBFA4524BA14FD00366983 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEEBFA3724BA14FC00366983 /* MemoAppWidgetExtension */;
+			targetProxy = CEEBFA4424BA14FD00366983 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -845,6 +954,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2B24713ACBDE636EAAC65525 /* Pods-MemoApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MemoApp/MemoApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -868,6 +978,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4494B8FA42C9341931DBEA29 /* Pods-MemoApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MemoApp/MemoApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -929,6 +1040,54 @@
 			};
 			name = Release;
 		};
+		CEEBFA4824BA14FD00366983 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L47YWQ7AFX;
+				INFOPLIST_FILE = MemoAppWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "LEE-HAEUN.MemoApp.MemoAppWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CEEBFA4924BA14FD00366983 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L47YWQ7AFX;
+				INFOPLIST_FILE = MemoAppWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "LEE-HAEUN.MemoApp.MemoAppWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -955,6 +1114,15 @@
 			buildConfigurations = (
 				7D9276B12402DE4000AFD435 /* Debug */,
 				7D9276B22402DE4000AFD435 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEEBFA4724BA14FD00366983 /* Build configuration list for PBXNativeTarget "MemoAppWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEEBFA4824BA14FD00366983 /* Debug */,
+				CEEBFA4924BA14FD00366983 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
