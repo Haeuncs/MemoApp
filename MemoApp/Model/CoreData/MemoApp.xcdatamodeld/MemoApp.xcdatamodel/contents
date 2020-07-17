@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17162" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Images" representedClassName="Images" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="identifier" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <relationship name="images" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Memo" inverseName="images" inverseEntity="Memo"/>
+        <attribute name="identifier" optional="YES" attributeType="Binary"/>
+        <relationship name="images" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Images" inverseName="images" inverseEntity="Images"/>
     </entity>
     <entity name="Memo" representedClassName="Memo" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="identifier" optional="YES" attributeType="Transformable"/>
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="memo" optional="YES" attributeType="String"/>
         <attribute name="modifyDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Images" inverseName="images" inverseEntity="Images"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Memo" inverseName="images" inverseEntity="Memo"/>
     </entity>
     <elements>
-        <element name="Images" positionX="-153" positionY="153" width="128" height="88"/>
-        <element name="Memo" positionX="-348.94921875" positionY="64.140625" width="128" height="133"/>
+        <element name="Images" positionX="-45" positionY="0" width="128" height="88"/>
+        <element name="Memo" positionX="-18" positionY="27" width="128" height="133"/>
     </elements>
 </model>

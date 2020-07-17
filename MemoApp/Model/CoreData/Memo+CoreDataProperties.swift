@@ -2,7 +2,7 @@
 //  Memo+CoreDataProperties.swift
 //  MemoApp
 //
-//  Created by LEE HAEUN on 2020/02/16.
+//  Created by LEE HAEUN on 2020/07/18.
 //  Copyright © 2020 LEE HAEUN. All rights reserved.
 //
 //
