@@ -273,32 +273,22 @@ extension HomeViewController {
                                 style: currentOrderType == orderTypes.title.title ? .selected : .default ,
                                 handler: {
                                   userPreferences.setOrderType(type: .title)
+                                  self.viewModel.inputs.getMemo()
     }))
     bottomPopupVC.addAction(BottomCellData(cellData: orderTypes.createDate,
                                 style: currentOrderType == orderTypes.createDate.title ? .selected : .default,
                                 handler: {
                                   userPreferences.setOrderType(type: .createDate)
+                                  self.viewModel.inputs.getMemo()
     }))
     bottomPopupVC.addAction(BottomCellData(cellData: orderTypes.modifyDate,
                                 style: currentOrderType == orderTypes.modifyDate.title ? .selected : .default,
                                 handler: {
                                   userPreferences.setOrderType(type: .modifyDate)
+                                  self.viewModel.inputs.getMemo()
     }))
 
     self.present(bottomPopupVC, animated: true, completion: nil)
-  }
-
-  func setRootViewController(_ vc: UIViewController, animated: Bool = true) {
-      guard let window = UIApplication.shared.keyWindow else {
-          return
-      }
-      window.rootViewController = UINavigationController(rootViewController: vc)
-      window.makeKeyAndVisible()
-      UIView.transition(with: window,
-                        duration: 0.3,
-                        options: .transitionCrossDissolve,
-                        animations: nil,
-                        completion: nil)
   }
 }
 
