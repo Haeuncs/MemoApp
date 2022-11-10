@@ -45,7 +45,8 @@ class MemoTextView: UIView {
     self.backgroundColor = Color.background
     textView.backgroundColor = Color.background
     titleLabel.textColor = Color.black
-    textView.textColor = Color.black
+    // UITextView에서 Place holder를 쓰기위해 주석 처리
+    // textView.textColor = Color.black
     textView.tintColor = Color.black
     lineView.backgroundColor = Color.grey
   }
@@ -67,7 +68,11 @@ class MemoTextView: UIView {
     text.backgroundColor = Color.background
     text.translatesAutoresizingMaskIntoConstraints = true
     text.isScrollEnabled = false
-    text.textColor = Color.black
+    // UITextView에서 Place holder를 쓰기위해 주석 처리
+    // text.textColor = Color.black
+    text.text = "Add contents here."
+    // 회색을 Placeholder로 생각 (UITextField와 동일 색상)
+    text.textColor = Color.grey
     text.font = .m18
     text.tintColor = Color.black
     return text
@@ -80,4 +85,20 @@ class MemoTextView: UIView {
     return view
   }()
 
+}
+
+extension MemoTextView: UITextViewDelegate {
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    guard textView.textColor == Color.grey else { return }
+    textView.textColor = .white
+    textView.text = nil
+  }
+
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if textView.text.isEmpty {
+      textView.text = "Add contents here."
+      textView.textColor = Color.grey
+    }
+  }
+  
 }
